@@ -23,8 +23,8 @@ function ajaxOwner(){
                 lastNotificationAdded = data.notifications.length;
                 sessionStorage.setItem("lastNotificationAdded",lastNotificationAdded)
                 var numberUnreadMessages = lastNotificationAdded - sessionStorage.getItem("lastNotificationRead");
+
                 const $bell = document.getElementById('notification-messages');
-                const count = Number($bell.getAttribute('data-count')) || 0;
                 $bell.setAttribute('data-count', numberUnreadMessages);
                 $bell.classList.add('show-count');
                 $bell.classList.add('notify');

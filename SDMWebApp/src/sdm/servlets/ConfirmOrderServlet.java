@@ -1,5 +1,6 @@
 package sdm.servlets;
 
+import com.google.gson.Gson;
 import models.user.Customer;
 import models.user.User;
 import models.user.UserManager;
@@ -14,6 +15,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,40 +27,40 @@ public class ConfirmOrderServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-
-
+        response.setContentType("application/json");
         System.out.println(TAG + " - started!");
         String xString = request.getParameter("x-position");
         int x = Integer.parseInt(xString);
         String yString = request.getParameter("y-position");
         int y = Integer.parseInt(yString);
-
-        System.out.println("test     1");
-
         int[] loc = new int[2];
         loc[0] = x;
         loc[1] = y;
         String zoneName = request.getParameter("zoneName");
-        UserManager userManager = ServletUtils.getUserManager(getServletContext());
+        String orderType = request.getParameter("orderType");
         String username = SessionUtils.getUsername(request);
+
+
+        UserManager userManager = ServletUtils.getUserManager(getServletContext());
         Customer user = (Customer) userManager.getUserByName(username);
-        ZonesManager zonesManager;
-        zonesManager = ServletUtils.getZoneManager(getServletContext());
+        ZonesManager zonesManager = ServletUtils.getZoneManager(getServletContext());
         Zone zone = zonesManager.getZoneByName(zoneName);
 
-
-        System.out.println("test     2");
-        String orderType = request.getParameter("orderType");
-        System.out.println("test     3");
-
-        synchronized (user){
+        boolean isSuccess;
+        boolean isValidLocation = zonesManager.isValidLocation(loc);
+        if (isValidLocation){
             if (user.getCurrentCart().getCartItems().size() > 0){
                 zone.confirmOrderForUser(user, orderType, loc);
             }
-            //user.askStoresForEntitledDiscounts();
+            isSuccess = true;
+        } else{
+            isSuccess = false;
         }
-
-        System.out.println(TAG + " - done!\n\n");
+        Gson gson = new Gson();
+        try (PrintWriter out = response.getWriter()){
+            out.println(gson.toJson(isSuccess));
+            out.flush();
+        }
     }
 
 

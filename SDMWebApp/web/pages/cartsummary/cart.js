@@ -234,12 +234,10 @@ function createXYChoices(){
 
     $("#x-choice").change(function(){
         xpos = $(this).children("option:selected").val();
-        alert("You have selected the x position - " + xpos);
     });
 
     $("#y-choice").change(function(){
         ypos = $(this).children("option:selected").val();
-        alert("You have selected the y position - " + ypos);
     });
 }
 
@@ -256,10 +254,17 @@ function onConfirmOrderClick(){
     $.ajax({
         url: CONFIRM_ORDER_URL,
         data: {"x-position": xpos, "y-position": ypos, "orderType":orderType, "zoneName": zoneName},
-        success: function () {
-            console.log("confirm success!")
-            emptyCartInProgress(goToHomepage)
+        dataType: 'json',
+        success: function (data) {
 
+            console.log("confirm success!, returned:")
+            console.log(data);
+            if (data === true){
+                alert("Order successfully created!")
+                emptyCartInProgress(goToHomepage)
+            } else{
+                alert("This location is currently taken. Please enter a different location and try again.")
+            }
         },
         error: function (error) {
             console.log("confirm error! - " + error.message)

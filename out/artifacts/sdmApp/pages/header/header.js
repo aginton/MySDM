@@ -10,11 +10,49 @@ function updateUserName(){
     $("#userprofile").text(sessionStorage.getItem("username"));
 }
 
-function createHeader(){
+function createHeaderForCustomer(){
+    var user = sessionStorage.getItem("userName");
+
+//prepend() - Inserts content at the beginning of the selected elements
+    var content = `
+    <div class="header">
+            <ul class="navigation">
+
+                <li>
+                    <a href="#">Chat</a>
+                </li>
+                            
+                <li>
+                    <button type="button" id="cart-btn" class="notification items-in-cart" >
+                        <span>Cart</span>
+                        <span class="badge" id="number-cart-items">3</span>
+                    </button>
+                </li>
+                
+                <li>
+                    <a href="#" id="userprofile">${user}</a>
+                </li>
+            </ul>
+        </div>
+    `
+    $("body").prepend(content);
+    
+    $("#cart-btn").on('click',function () {
+        window.location.replace(CART_SUMMARY_URL);
+    })
+}
+
+
+function createHeaderForOwner(){
     var user = sessionStorage.getItem("userName");
     var notifications = JSON.parse(sessionStorage.getItem("notifications"));
+    notifications.reverse()
+    var numberUnreadMessages = notifications.length - sessionStorage.getItem("lastNotificationRead")
+
     $("#dropdown-list").empty()
     var messages = ``;
+
+
     $.each(notifications,function (i,item) {
         messages += `<li>${item}</li>`
     })
@@ -30,24 +68,16 @@ function createHeader(){
                 <li>
                     <button type="button" class="notification dropdown-toggle" >
                         <span>Notifications</span>
-                        <span class="notification-messages" id="notification-messages">0</span>
+                        <span class="notification-messages" id="notification-messages"></span>
 
                         <ul id="dropdown-list" class="dropdown">
                             ${messages}
-                            <li><a href="#" style="color: rgba(115, 187, 22, 1)"><i class="fa fa-list"></i> View All Notifications</a></li>
+<!--                            <li><a href="#" style="color: rgba(115, 187, 22, 1)"><i class="fa fa-list"></i> View All Notifications</a></li>-->
                         </ul>
 
                     </button>
 
-                </li>
-                
-                <li>
-                    <button type="button" id="cart-btn" class="notification items-in-cart" >
-                        <span>Cart</span>
-                        <span class="badge" id="number-cart-items">3</span>
-                    </button>
-                </li>
-                
+                </li>                                             
                 <li>
                     <a href="#" id="userprofile">${user}</a>
                 </li>
@@ -57,12 +87,12 @@ function createHeader(){
 
     $("body").prepend(content);
 
-
-
-    $("#cart-btn").on('click',function () {
-        window.location.replace(CART_SUMMARY_URL);
-    })
-
+    $bell = document.getElementById('notification-messages');
+    if (numberUnreadMessages !== 0){
+        $bell.setAttribute('data-count', numberUnreadMessages);
+        $bell.classList.add('show-count');
+        $bell.classList.add('notify');
+    }
 }
 
 
@@ -81,12 +111,6 @@ function openNotificationsList() {
 }
 
 function dropdownToggle(){
-    // Dropdown toggle
-
-    // $('.dropdown-toggle').click(function() {
-    //     //$(this).next('.dropdown').toggle( 400 );
-    //     $("#dropdown-list").toggle(400)
-    // });
 
     $('.dropdown-toggle').click(openNotificationsList);
 
@@ -126,21 +150,21 @@ $(function() {
     head.prepend(link);
     head.prepend(link2)
 
-    createHeader();
-    dropdownToggle()
+    var role = sessionStorage.getItem("role");
+    if (role === "owner"){
+        createHeaderForOwner();
+        dropdownToggle()
+        // $bell = document.getElementById('notification-messages');
+
+        $bell.addEventListener("animationend", function(event){
+            $bell.classList.remove('notify');
+        });
+    }
+    if (role === "customer"){
+        createHeaderForCustomer();
+    }
+
     updateUserName();
 
-    $bell = document.getElementById('notification-messages');
-    //
-    // $button.addEventListener("click", function(event){
-    //     const count = Number($bell.getAttribute('data-count')) || 0;
-    //
-    //     $bell.setAttribute('data-count', count + 1);
-    //     $bell.classList.add('show-count');
-    //     $bell.classList.add('notify');
-    // });
 
-    $bell.addEventListener("animationend", function(event){
-        $bell.classList.remove('notify');
-    });
 });

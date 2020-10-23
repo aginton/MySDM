@@ -297,7 +297,7 @@ function ajaxCustomerOrderDetails(rowIndex) {
     var id = orders[rowIndex].orderId.id;
     var subId = orders[rowIndex].orderId.subId;
     var orderType = orders[rowIndex].orderType;
-    alert(`Getting details for ${orderType} order ${id}-${subId}`)
+    //alert(`Getting details for ${orderType} order ${id}-${subId}`)
 
     $.ajax({
         url: CUSTOMER_ORDER_DETAILS_URL,
@@ -335,7 +335,7 @@ function ajaxStoreOrderDetails(rowIndex) {
     var subId = orders[rowIndex].orderId.subId;
     var orderType = orders[rowIndex].orderType;
     var storeName = orders[rowIndex].storeName;
-    alert(`Getting details for ${orderType} order ${id}-${subId} in store ${storeName}`)
+    //alert(`Getting details for ${orderType} order ${id}-${subId} in store ${storeName}`)
 
     $.ajax({
         url: STORE_ORDER_DETAILS_URL,
