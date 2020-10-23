@@ -56,7 +56,7 @@ function createHeader(){
     `
 
     $("body").prepend(content);
-
+    
     $("#cart-btn").on('click',function () {
         window.location.replace(CART_SUMMARY_URL);
     })
@@ -165,22 +165,13 @@ $(function() {
     head.prepend(link);
     head.prepend(link2)
 
-    var role = sessionStorage.getItem("role");
-    if (role === "owner"){
-        createHeader();
-        dropdownToggle()
-        $bell = document.getElementById('notification-messages');
-
-        $bell.addEventListener("animationend", function(event){
-            $bell.classList.remove('notify');
-        });
-    }
-    if (role === "customer"){
-        createHeader();
-    }
-
-
+    createHeader();
+    dropdownToggle()
     updateUserName();
 
+    $bell = document.getElementById('notification-messages');
 
+    $bell.addEventListener("animationend", function(event){
+        $bell.classList.remove('notify');
+    });
 });
