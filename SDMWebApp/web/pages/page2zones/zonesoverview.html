@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>My Super Duper Market!</title>
+        <link rel="stylesheet" href="../../common/styles/style.css">
+        <script src="../../common/jquery-3.5.1.min.js"></script>
+
+        <script src="../../common/bootstrap/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="../../common/bootstrap/css/bootstrap.min.css">
+
+
+        <script src="../../common/context-path-helper.js"></script>
+
+        <script src="../header/header.js"></script>
+        <script src="../usersession/currentsession.js"></script>
+        <script src="../usersession/owner.js"></script>
+        <script src="../usersession/customer.js"></script>
+        <script src="../usersession/owner.js"></script>
+
+        <script src="zonesoverview.js"></script>
+        <link rel="stylesheet" href="zonesoverview.css">
+    </head>
+
+    <body>
+
+
+        <h1 id="testToggle"></h1>
+
+        <div class="container-column1of2">
+            <div class="container-uploadform">
+                <form id="file-upload-form">
+                    <p>What file do you want to upload?</p>
+                    <input type="file" name="fileToUpload" id="file2upload">
+                    <br/>
+                    <br/>
+                    <input id="submitbutton" type="submit" value="Upload File">
+                </form>
+            </div>
+            <br><br>
+            <p id="filesubmitmessage"></p>
+            <div class="container-zones-section">
+                <section id="zones-section">
+                    <h1>Zones</h1>
+                    <p id="zonestext">Hey zonestext</p>
+                    <table id="zones-table" class="zones-table-class">
+                        <thead>
+                        <tr>
+                            <th>Founder</th>
+                            <th>Name</th>
+                            <th># Items</th>
+                            <th># Stores</th>
+                            <th>Ave. Order Cost</th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+
+                        </tbody>
+                    </table>
+
+                    <h3>The field :</h3>
+                    The field to fill in with second item of a row : <input type="text" id="fillname" value="" />
+
+                </section>
+            </div>
+            <div class="container-activity-section">
+                <section id="activity-history-section">
+                    <h1>Activity History</h1>
+                    <table id="activity-history-table">
+                        <thead>
+                        <tr>
+                            <th>Transaction Type</th>
+                            <th>Transaction Date</th>
+                            <th>Amount</th>
+                            <th>Balance before</th>
+                            <th>Balance after</th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+
+                        </tbody>
+
+                    </table>
+                </section>
+            </div>
+            <div class="container-chatwindow">
+                <div id="chatwindow">
+                    <h4>Chat</h4>
+                    <div id="chatarea" class="span6">
+                        <form id="chatform" method="POST" action="sendChat">
+                            <input type="text" id="userstring" name="userstring"/>
+                            <input type="submit" value="Send"/>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="container-bottombutton">
+                <div class="button">
+
+                    <a href="">Logout</a>
+                </div>
+            </div>
+        </div>
+        <div class="container-column2of2">
+
+            <div class="container-userdetails">
+                <p id="user-name-label"></p>
+                <p id="user-role-label"></p>
+                <p id="user-balance-label"></p>
+            </div>
+
+            <div class="userslist">
+                <h4>Online</h4>
+                <div class="clearfix">
+                    <div class="input">
+                        <ul id="userslist">
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <a href="../page3zone/zone.html" class="btn btn-primary">Back to selected zone</a>
+        </footer>
+
+    </body>
+</html>
+
