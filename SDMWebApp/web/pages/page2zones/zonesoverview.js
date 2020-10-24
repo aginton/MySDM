@@ -100,8 +100,6 @@ function updateTransactionTable() {
     /*
     activitySummaries: [amount: "138.28", balanceAfter: "-138.28", balanceBefore: "0.00", date: "17-10-2020 02:10", type: "withdrawal"},...{}],
      */
-
-
     if (numberTransactionsInTable === transactions.length){
         // var entries = JSON.parse(sessionStorage.getItem("transactions"));
         var entries = JSON.parse(sessionStorage.getItem("transactions"));
@@ -128,6 +126,7 @@ function updateTransactionTable() {
 $(function() {
     onUploadFile();
     ajaxZonesTable();
+    ajaxUsersList();
     updateTransactionTable();
 
     role = sessionStorage.getItem("role");

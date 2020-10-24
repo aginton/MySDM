@@ -94,12 +94,47 @@ function goToHomepage() {
 function ajaxUsersList() {
     $.ajax({
         url: USER_LIST_URL,
-        success: function(users) {
+        success: function(data) {
+            var users = objToStrMap(data);
+            console.log(users)
+            console.log("ajaxUsersList returned data with type:")
+            console.log(typeof users)
             refreshUsersList(users);
         }
-    });
+    })
+        .done(setTimeout(ajaxUsersList,refreshRate))
 }
 
+function objToStrMap(obj) {
+    let strMap = new Map();
+    for (let k of Object.keys(obj)) {
+        strMap.set(k, obj[k]);
+    }
+    return strMap;
+}
+
+
+//users = an array of user json object, each one includes name and role.
+// [{"name":"bibi","role":"customer"},{"name":"lala","role":"customer"}]
+function refreshUsersList(users) {
+    //clear all current users
+    $("#userslist").empty();
+
+    console.log("user list was emptied");
+    console.log(users);
+
+    var index = 0;
+    users.forEach((role,name)=>{
+        console.log("Adding user #" + index+ ": " + name + " " + role);
+        $('<li>' + name + "-" + role + '</li>').appendTo($("#userslist"));
+        index++;
+    })
+
+    // $.each(users || [], function(index, user) {
+    //     console.log("Adding user #" + user.index+ ": " + user.name + " " + user.role);
+    //     $('<li>' + user.name + "-" + user.role + '</li>').appendTo($("#userslist"));
+    // });
+}
 
 $(function() { // onload...do
     console.log("\ncurrentsession.js onload")

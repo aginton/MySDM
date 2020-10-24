@@ -46,7 +46,9 @@ function createHeaderForCustomer(){
 function createHeaderForOwner(){
     var user = sessionStorage.getItem("userName");
     var notifications = JSON.parse(sessionStorage.getItem("notifications"));
-    notifications.reverse()
+    if (notifications !== null){
+        notifications.reverse()
+    }
     var numberUnreadMessages = notifications.length - sessionStorage.getItem("lastNotificationRead")
 
     $("#dropdown-list").empty()
