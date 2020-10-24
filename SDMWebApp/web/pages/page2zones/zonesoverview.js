@@ -100,13 +100,13 @@ function updateTransactionTable() {
     /*
     activitySummaries: [amount: "138.28", balanceAfter: "-138.28", balanceBefore: "0.00", date: "17-10-2020 02:10", type: "withdrawal"},...{}],
      */
-    if (numberTransactionsInTable === transactions.length){
+    var transactions = JSON.parse(sessionStorage.getItem("transactions"));
+    if (numberTransactionsInTable !== transactions.length){
         // var entries = JSON.parse(sessionStorage.getItem("transactions"));
-        var entries = JSON.parse(sessionStorage.getItem("transactions"));
         console.log("updateTransactionsTable has data:")
-        console.log(entries)
+        console.log(transactions)
         var rows = ``;
-        $.each(entries,function (i,item) {
+        $.each(transactions,function (i,item) {
             rows += `
         <tr><td>${item.type}</td><td>${item.date}</td><td>${item.amount}</td><td>${item.balanceBefore}</td>
         <td>${item.balanceAfter}</td></tr>

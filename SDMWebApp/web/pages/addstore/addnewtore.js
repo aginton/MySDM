@@ -250,7 +250,7 @@ $(function(){
                         alert("Store was added successfully!");
 
                         //sendAlertToZoneFounder(data);
-                        //window.location = "../page3zone/zone.html";
+                        window.location = "../page3zone/zone.html";
                     }
                     else {              //chosen location is not available
                         alert("Unavailable location:\n There is already a store in (" + data.loc[0] + "," + data.loc[1] + ")");

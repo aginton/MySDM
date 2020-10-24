@@ -55,6 +55,7 @@ $(function () {
                     sessionStorage.setItem("username",name)
                     sessionStorage.setItem("role",radioValue)
                     sessionStorage.setItem("balance",0)
+                    sessionStorage.setItem("transactions",JSON.stringify([]))
                     sessionStorage.setItem("lastNotificationRead",0)
                     sessionStorage.setItem("lastNotificationAdded",0)
                     window.location.replace(PAGE2_URL);
