@@ -49,7 +49,7 @@ function eachChosenItemHasPrice(form) {
         console.log("now checking the checkbox named: " + itemId);
         var priceTextFieldName = "givenprice-"+itemId;
         console.log("checking the price field named: " + priceTextFieldName);
-        if (form[priceTextFieldName].value == "" || !Number.isInteger(parseInt(form[priceTextFieldName].value))) {
+        if (form[priceTextFieldName].value == "" || !Number.isInteger(parseInt(form[priceTextFieldName].value)) || parseInt(form[priceTextFieldName].value)<= 0) {
             alert("Please set a valid price for item id: " + itemId);
             return false;
         }

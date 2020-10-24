@@ -115,8 +115,7 @@ function ajaxZoneStores(){
 
 function createStoreItemsTable(items){
     items.sort(compareItemID)
-    //console.log("createStoreItemsTable() received input: " + items)
-    var table = "<table ><caption>Zone Stores</caption> <thead> <tr> <th>ID</th> <th>Name</th>" +
+    var table = "<table > <thead> <tr> <th>ID</th> <th>Name</th>" +
         "<th>Categoryr</th> <th>Unit Price</th> <th>Total Sold</th> </tr> </thead> <tbody>";
 
     var content = '';
@@ -207,10 +206,6 @@ function createZoneStoresTable(entries) {
         trHTML += `<tr><td>${item.storeID}</td><td>${item.storeName}</td><td>${item.owner}</td><td>${storeItemsTable}</td>
                     <td>${item.numberOfOrders}</td><td>${item.salesIncome}</td><td>${item.ppk}</td>
                     <td>${Number.parseFloat(item.deliveryIncome ).toFixed(2)}</td></tr>`
-
-        // trHTML += '<tr><td>' + item.storeID + '</td><td>' + item.storeName + '</td><td>' + item.owner + '</td><td>' + storeItemsTable + '</td><td>'
-        //     + item.numberOfOrders + '</td><td>' + item.salesIncome + "</td><td>" + item.ppk + '</td><td>'
-        //     + Number.parseFloat(item.deliveryIncome ).toFixed(2)  + '</td></tr>';
     });
 
     $('#zone-stores-table tbody').empty().html(trHTML)
@@ -405,33 +400,46 @@ function getZoneItemsAndStores(){
 
 $(function() { // onload...do
     console.log("zone.js onload ")
-
-    onDynamicButtonClick()
-    getZoneItemsAndStores();
-
     role = sessionStorage.getItem("role");
-    if (role === "customer"){
-        ajaxCustomerOrders(createCustomerOrdersTable);
-        document.querySelector('#user-orders-table tbody').onclick = function(ev) {
-            var index = ev.target.parentElement.rowIndex;
-    //        alert(`Clicked row ${index}`)
-            ajaxCustomerOrderDetails(index-1);
+    zone = sessionStorage.getItem("zone")
+
+    if (zone === "" || zone === null){
+        var content = `<h1>NO ZONE SELECTED!</h1>`
+        $('#main-container').hide()
+        $('body').append(content)
+
+    } else{
+        $("#welcome-msg").text(`${zone} - Overview`)
+
+        getZoneItemsAndStores();
+
+        if (role === "customer"){
+            $("#zone-table-message").html(`<h2>To start a static order, click on the row for the store you wish to order from.</h2>
+            <h2 class="h2inline">To start a dynamic order, </h2><button type="button" id="dynamic-order-btn">Click Here</button><h2 class="h2inline">!</h2>
+        `)
+            onDynamicButtonClick()
+            ajaxCustomerOrders(createCustomerOrdersTable);
+            document.querySelector('#user-orders-table tbody').onclick = function(ev) {
+                var index = ev.target.parentElement.rowIndex;
+                //        alert(`Clicked row ${index}`)
+                ajaxCustomerOrderDetails(index-1);
+            }
         }
+        if (role === "owner"){
+            $("#zone-table-message").html(`<h2>To add a new store, <a href="../addstore/addstore.html">click here</a></h2>`)
+            ajaxOwner();
+            var ordersObj = function(){
+                ajaxOwnerOrders(createOwnerOrdersTable)
+            }
+            ajaxOwnerOrders(createOwnerOrdersTable);
+            setInterval(ordersObj,refreshRate);
+
+            document.querySelector('#user-orders-table tbody').onclick = function(ev) {
+                var index = ev.target.parentElement.rowIndex;
+                //alert(`Clicked row ${index}`)
+                ajaxStoreOrderDetails(index-1);
+            }
+        }
+
     }
-    if (role === "owner"){
-        ajaxOwner();
-        var ordersObj = function(){
-            ajaxOwnerOrders(createOwnerOrdersTable)
-        }
-        ajaxOwnerOrders(createOwnerOrdersTable);
-        setInterval(ordersObj,refreshRate);
-
-        document.querySelector('#user-orders-table tbody').onclick = function(ev) {
-            var index = ev.target.parentElement.rowIndex;
-            //alert(`Clicked row ${index}`)
-            ajaxStoreOrderDetails(index-1);
-        }
-    }
-
-
 });

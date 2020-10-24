@@ -49,6 +49,7 @@ $(function () {
             data: {"username": name, "role": radioValue},
             dataType: 'json',
             success: function(data){
+                /* {isValid: false, errorMessage: "Username ADAM already exists. Please enter a different username."} */
                 console.log(data)
                 console.log(data.isValid)
                 if (data.isValid){
@@ -60,7 +61,7 @@ $(function () {
                     sessionStorage.setItem("lastNotificationAdded",0)
                     window.location.replace(PAGE2_URL);
                 }else{
-                    $("#servlet-response").text(data);
+                    $("#servlet-response").text(data.errorMessage);
                 }
             },
             error: function(err){

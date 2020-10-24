@@ -147,9 +147,13 @@ ul.dropdown li:last-child{
 }
 
 .notification-messages.notify::before {
-    animation: bell 1s ease-out;
+    /*animation: bell 1s ease-out;*/
+    animation: bell 2s infinite;
     transform-origin: center top;
 }
+
+.initiallyHidden { display: none; }
+
 
 @keyframes bell {
     0% {transform: rotate(35deg);}

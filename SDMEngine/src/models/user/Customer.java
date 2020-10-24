@@ -97,4 +97,10 @@ public class Customer extends User{
     public void emptyCartInProgress() {
         this.currentCart = new Cart();
     }
+
+    public void deposit(double amount) {
+        if (amount >0){
+            balance += amount;
+        }
+    }
 }

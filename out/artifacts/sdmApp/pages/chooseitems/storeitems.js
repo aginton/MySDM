@@ -11,11 +11,29 @@ var items;
 
 
 function checkIfHasImage(itemName) {
-    if (itemName.includes("cheeze")) {
-        return "../../common/images/yellowcheeze.png";
+    if (itemName.includes("Cheeze")) {
+        return "../../common/images/cheeze.png";
+    }
+    if (itemName.includes("Candle")) {
+        return "../../common/images/candle.png";
+    }
+    if (itemName.includes("Pasta")) {
+        return "../../common/images/pasta.png";
     }
     if (itemName.includes("Toilet")) {
-        return "../../common/images/toiletpapers.jpg";
+        return "../../common/images/toiletpaper.png";
+    }
+    if (itemName.includes('Lemon')){
+        return "../../common/images/lemon.png";
+    }
+    if (itemName.includes('Banana')){
+        return "../../common/images/bananas.png";
+    }
+    if (itemName.includes('Egg')){
+        return "../../common/images/eggs.png";
+    }
+    if (itemName.includes('MIlki')){
+        return "../../common/images/milki.png";
     }
     if (itemName.includes("Tomato")) {
         return "../../common/images/tomato.png";

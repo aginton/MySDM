@@ -25,7 +25,7 @@ var discountCart = [];
 var orderSummaryVersion = 0;
 var activityVersion = 0;
 var transactions = [];
-
+var oldBalance;
 
 
 var currentZone;
@@ -61,6 +61,11 @@ function ajaxCurrentUser() {
         success: function(data) {
             /*    {name: "frank", role: "customer", balance: 0, transactions:[{date: "22-10-2020 04:14", amount: 146.06, balanceBefore: 0, balanceAfter: -146.06},...,{}]}*/
 
+            if (balance !== data.balance){
+                sessionStorage.setItem("balance",data.balance);
+                updateProfileBalance(data.balance);
+            }
+
             if (showOnce === 0 ){
                 // sessionStorage.setItem("name",data.name)
                 console.log("ajaxCurrentUser success")
@@ -68,7 +73,6 @@ function ajaxCurrentUser() {
                 showOnce = 1;
             }
             if (transactions.length !== data.transactions.length){
-                sessionStorage.setItem("balance",data.balance);
                 transactions = data.transactions;
                 sessionStorage.setItem("transactions",JSON.stringify(transactions))
             }
@@ -131,11 +135,6 @@ function refreshUsersList(users) {
         $('<li>' + name + "-" + role + '</li>').appendTo($("#userslist"));
         index++;
     })
-
-    // $.each(users || [], function(index, user) {
-    //     console.log("Adding user #" + user.index+ ": " + user.name + " " + user.role);
-    //     $('<li>' + user.name + "-" + user.role + '</li>').appendTo($("#userslist"));
-    // });
 }
 
 $(function() { // onload...do

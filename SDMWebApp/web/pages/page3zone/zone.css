@@ -20,3 +20,8 @@
     background-color: #4CAF50;
     color: white;
 }
+
+.h2inline {
+    display: inline-block;
+    margin: 0;
+}

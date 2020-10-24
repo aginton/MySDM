@@ -4,16 +4,19 @@ This file should be responsible for setting up the header on each page
 
 var CART_SUMMARY_URL = "../cartsummary/cart.html"
 
-var $bell;
+var username = sessionStorage.getItem("username");
+var role = sessionStorage.getItem("role")
+var balance = sessionStorage.getItem("balance");
 
-function updateUserName(){
-    $("#userprofile").text(sessionStorage.getItem("username"));
-}
+var $bell;
+//
+// function updateUserName(){
+//     $("#userprofile").text(sessionStorage.getItem("username"));
+// }
 
 function createHeaderForCustomer(){
-    var user = sessionStorage.getItem("username");
 
-//prepend() - Inserts content at the beginning of the selected elements
+//                    <a href="#" id="userprofile">${user}</a>
     var content = `
     <div class="header">
             <ul class="navigation">
@@ -30,7 +33,16 @@ function createHeaderForCustomer(){
                 </li>
                 
                 <li>
-                    <a href="#" id="userprofile">${user}</a>
+                    <button type="button" class="notification profile-dropdown" >
+                    ${username}
+                        <ul id="dropdown-list" class="dropdown-profile-list initiallyHidden">
+                            <li>Role ${role}</li>
+                            <li>Balance: <span id="user-balance">${balance}</span></li>
+                            <li> <a href="../page1signup/signup.html">Logout</a></li>
+
+                        </ul>
+
+                    </button>
                 </li>
             </ul>
         </div>
@@ -44,10 +56,6 @@ function createHeaderForCustomer(){
 
 
 function createHeaderForOwner(){
-    var username = sessionStorage.getItem("username");
-    var role = sessionStorage.getItem("role")
-    var balance = sessionStorage.getItem("balance");
-
     var notifications = JSON.parse(sessionStorage.getItem("notifications"));
     var numberUnreadMessages = 0;
 
@@ -88,10 +96,11 @@ function createHeaderForOwner(){
                 <li>
 <!--                    <a href="profile-dropdown" data-toggle="collapse" id="userprofile"></a>-->
                         <button type="button" class="notification profile-dropdown" >
-                        <span class="userprofile" id="userprofile"></span>
-                        <ul id="dropdown-list" class="dropdown-profile-list">
-                            <li>${role}</li>
-                            <li id="user-balance">${balance}</li>
+                        ${username}
+                        <ul id="dropdown-list" class="dropdown-profile-list initiallyHidden">
+                            <li>Role ${role}</li>
+                            <li>Balance: <span id="user-balance">${balance}</span></li>
+                            <li> <a href="../page1signup/signup.html">Logout</a></li>
                         </ul>
 
                     </button>
@@ -124,6 +133,7 @@ function openNotificationsList() {
     $bell.setAttribute('data-count', 0);
     $bell.classList.remove('show-count');
     $bell.classList.remove('notify');
+
 }
 function openUserProfile() {
     console.log("openUserProfile Clicked!")
@@ -133,7 +143,6 @@ function openUserProfile() {
 function dropdownToggle(){
 
     $('.dropdown-toggle').click(openNotificationsList);
-    $(".profile-dropdown").click(openUserProfile)
 
     //https://stackoverflow.com/questions/32346507/notification-message-using-php-and-jquery
     //https://www.geeksforgeeks.org/how-to-count-number-of-notification-on-an-icon/
@@ -149,6 +158,11 @@ function dropdownToggle(){
         }
     });
 }
+
+function updateProfileBalance(data){
+    $("#user-balance").text(data)
+}
+
 
 //activate the timer calls after the page is loaded
 $(function() {
@@ -184,8 +198,9 @@ $(function() {
     if (role === "customer"){
         createHeaderForCustomer();
     }
+    $(".profile-dropdown").click(openUserProfile)
 
-    updateUserName();
+    //  updateUserName();
 
 
 });

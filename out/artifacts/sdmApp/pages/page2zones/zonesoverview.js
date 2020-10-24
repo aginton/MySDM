@@ -6,6 +6,7 @@ var CURRENT_USER_URL = buildUrlWithContextPath("currentuser");
 
 var UPLOAD_FILE_URL = buildUrlWithContextPath("uploadfile");
 var ZONES_LIST_URL = buildUrlWithContextPath("zoneslist");
+var DEPOSIT_URL = buildUrlWithContextPath("deposit");
 var ZONE_URL = "../page3zone/zone.html";
 
 
@@ -52,20 +53,6 @@ function ajaxZonesTable(){
 }
 
 
-//
-// function onZoneTableClick(){
-//
-//     $("#fillname").val("onZoneTableClick called!");
-//     $("#zones-table tbody tr").on("click", function(event){
-//         $("#fillname").val($(this).find("td").eq(1).html());
-//         var zone = ($(this).find("td").eq(1).html());
-//         console.log("Should go to zone " + zone);
-//         currentZone = zone;
-//         sessionStorage.setItem("zone", zone);
-//         window.location.replace(ZONE_URL);
-//     });
-// }
-
 function onUploadFile(){
     console.log("onSubmitFileClick called!")
     $("#file-upload-form").on("submit",function(e){
@@ -87,10 +74,31 @@ function onUploadFile(){
             }
         })
     })
+
 };
 
 
+function onDepositClicked(){
+    console.log("onDepositClicked called!")
 
+    $("#deposit-form").on("submit",function(e){
+        // cancel the default behavior
+        e.preventDefault();
+
+        $.ajax({
+            url: DEPOSIT_URL,
+            type: "POST",
+            data: $(this).serialize(),
+            success: function(){
+                alert("Deposit Successful!")
+            },
+            error: function(err){
+                alert("Unable to perform deposit. Please try again.")
+            }
+        })
+            .done($("#deposit-section").html(""))
+    })
+};
 
 
 
@@ -119,12 +127,52 @@ function updateTransactionTable() {
     setTimeout(updateTransactionTable,refreshRate);
 }
 
+function createDepositSection(){
+    console.log("creating upload file button")
+    var depositBtn = `<button type="button" id="deposit-btn" onclick="createDepositForm()">Deposit</button><br><br><div id="deposit-section"></div>`
+
+    $(".container-column1of2").prepend(depositBtn)
+
+}
+
+function createDepositForm() {
+    var content = `<div class="container-deposit">
+                <form id="deposit-form">
+                    <p>Enter deposit amount:</p>
+                    <input type="number" step="0.01" name="deposit-amount" id="deposit-amount">
+                    <br/>
+                    <br/>
+                    <input id="submitbutton" type="submit" value="Deposit">
+                </form>
+            </div>
+            <br><br>`
+
+    $("#deposit-section").prepend(content)
+
+    onDepositClicked()
+}
 
 
 
+
+function createUploadFileSection(){
+    console.log("creating upload file button")
+
+    var content = `            <div class="container-uploadform">
+                <form id="file-upload-form">
+                    <p>What file do you want to upload?</p>
+                    <input type="file" name="fileToUpload" id="file2upload">
+                    <br/>
+                    <br/>
+                    <input id="submitbutton" type="submit" value="Upload File">
+                </form>
+            </div>
+            <br><br>
+            <p id="filesubmitmessage"></p>`
+    $(".container-column1of2").prepend(content)
+}
 
 $(function() {
-    onUploadFile();
     ajaxZonesTable();
     ajaxUsersList();
     updateTransactionTable();
@@ -132,10 +180,12 @@ $(function() {
     role = sessionStorage.getItem("role");
     if (role === "owner"){
         ajaxOwner();
+        createUploadFileSection();
+        onUploadFile();
     }
-
-    //The chat content is refreshed only once (using a timeout) but
-    //on each call it triggers another execution of itself later (1 second later)
+    if (role === "customer"){
+        createDepositSection();
+    }
 
     //triggerAjaxChatContent();
 });
