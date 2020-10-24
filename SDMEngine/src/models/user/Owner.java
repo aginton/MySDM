@@ -10,6 +10,7 @@ import java.util.Set;
 public class Owner extends User {
     protected List<String> notifications;
     protected Set<Store> stores;
+    //private List<Feedback> feedbacks;
 
     public Owner(String name,String role){
         super(name, role);
