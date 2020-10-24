@@ -120,10 +120,10 @@ function ready() {
         window.location.replace(SALES_URL);
     })
 
-    document.getElementsByClassName('btn-cart-summary')[0].addEventListener('click', function () {
-        console.log("Should go to cart summary ");
-        window.location.replace(CART_SUMMARY_URL);
-    })
+    // document.getElementsByClassName('btn-cart-summary')[0].addEventListener('click', function () {
+    //     console.log("Should go to cart summary ");
+    //     window.location.replace(CART_SUMMARY_URL);
+    // })
 
 
 }

@@ -11,7 +11,7 @@ function updateUserName(){
 }
 
 function createHeaderForCustomer(){
-    var user = sessionStorage.getItem("userName");
+    var user = sessionStorage.getItem("username");
 
 //prepend() - Inserts content at the beginning of the selected elements
     var content = `
@@ -44,12 +44,17 @@ function createHeaderForCustomer(){
 
 
 function createHeaderForOwner(){
-    var user = sessionStorage.getItem("userName");
+    var username = sessionStorage.getItem("username");
+    var role = sessionStorage.getItem("role")
+    var balance = sessionStorage.getItem("balance");
+
     var notifications = JSON.parse(sessionStorage.getItem("notifications"));
+    var numberUnreadMessages = 0;
+
     if (notifications !== null){
         notifications.reverse()
+        numberUnreadMessages = notifications.length - sessionStorage.getItem("lastNotificationRead")
     }
-    var numberUnreadMessages = notifications.length - sessionStorage.getItem("lastNotificationRead")
 
     $("#dropdown-list").empty()
     var messages = ``;
@@ -81,7 +86,16 @@ function createHeaderForOwner(){
 
                 </li>                                             
                 <li>
-                    <a href="#" id="userprofile">${user}</a>
+<!--                    <a href="profile-dropdown" data-toggle="collapse" id="userprofile"></a>-->
+                        <button type="button" class="notification profile-dropdown" >
+                        <span class="userprofile" id="userprofile"></span>
+                        <ul id="dropdown-list" class="dropdown-profile-list">
+                            <li>${role}</li>
+                            <li id="user-balance">${balance}</li>
+                        </ul>
+
+                    </button>
+                    
                 </li>
             </ul>
         </div>
@@ -111,10 +125,15 @@ function openNotificationsList() {
     $bell.classList.remove('show-count');
     $bell.classList.remove('notify');
 }
+function openUserProfile() {
+    console.log("openUserProfile Clicked!")
+    $(".dropdown-profile-list").toggle(400)
+}
 
 function dropdownToggle(){
 
     $('.dropdown-toggle').click(openNotificationsList);
+    $(".profile-dropdown").click(openUserProfile)
 
     //https://stackoverflow.com/questions/32346507/notification-message-using-php-and-jquery
     //https://www.geeksforgeeks.org/how-to-count-number-of-notification-on-an-icon/

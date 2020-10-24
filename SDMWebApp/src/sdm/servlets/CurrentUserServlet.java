@@ -60,7 +60,8 @@ public class CurrentUserServlet extends HttpServlet {
         public UserJS(User user){
             name = user.getName();
             role = user.getRole();
-            balance = user.getBalance();
+            BigDecimal bd = new BigDecimal(user.getBalance()).setScale(2, RoundingMode.HALF_UP);
+            balance = bd.doubleValue();
             transactions = new ArrayList<>();
             for (Transaction transaction: user.getTransactions()){
                 transactions.add(new TransactionJS(transaction));

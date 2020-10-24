@@ -62,7 +62,7 @@ function ajaxCurrentUser() {
             /*    {name: "frank", role: "customer", balance: 0, transactions:[{date: "22-10-2020 04:14", amount: 146.06, balanceBefore: 0, balanceAfter: -146.06},...,{}]}*/
 
             if (showOnce === 0 ){
-                sessionStorage.setItem("name",data.name)
+                // sessionStorage.setItem("name",data.name)
                 console.log("ajaxCurrentUser success")
                 console.log(data)
                 showOnce = 1;
@@ -113,6 +113,8 @@ function objToStrMap(obj) {
     return strMap;
 }
 
+
+//https://2ality.com/2015/08/es6-map-json.html
 
 //users = an array of user json object, each one includes name and role.
 // [{"name":"bibi","role":"customer"},{"name":"lala","role":"customer"}]
