@@ -9,20 +9,16 @@ var role = sessionStorage.getItem("role")
 var balance = sessionStorage.getItem("balance");
 
 var $bell;
-//
-// function updateUserName(){
-//     $("#userprofile").text(sessionStorage.getItem("username"));
-// }
+
 
 function createHeaderForCustomer(){
 
-//                    <a href="#" id="userprofile">${user}</a>
     var content = `
     <div class="header">
             <ul class="navigation">
 
                 <li>
-                    <a href="#">Chat</a>
+                    <a href="../chat/chat.html">Chat</a>
                 </li>
                             
                 <li>
@@ -78,7 +74,7 @@ function createHeaderForOwner(){
             <ul class="navigation">
 
                 <li>
-                    <a href="#">Chat</a>
+                    <a href="../chat/chat.html">Chat</a>
                 </li>
                 <li>
                     <button type="button" class="notification dropdown-toggle" >
@@ -87,14 +83,12 @@ function createHeaderForOwner(){
 
                         <ul id="dropdown-list" class="dropdown">
                             ${messages}
-<!--                            <li><a href="#" style="color: rgba(115, 187, 22, 1)"><i class="fa fa-list"></i> View All Notifications</a></li>-->
                         </ul>
 
                     </button>
 
                 </li>                                             
                 <li>
-<!--                    <a href="profile-dropdown" data-toggle="collapse" id="userprofile"></a>-->
                         <button type="button" class="notification profile-dropdown" >
                         ${username}
                         <ul id="dropdown-list" class="dropdown-profile-list initiallyHidden">
@@ -199,8 +193,4 @@ $(function() {
         createHeaderForCustomer();
     }
     $(".profile-dropdown").click(openUserProfile)
-
-    //  updateUserName();
-
-
 });

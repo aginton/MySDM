@@ -114,8 +114,7 @@ function createStoreItems(data) {
         if (orderType === "static"){
             trhtml += `<td><span class="shop-item-price">${item.price}</span></td>`
         }
-        trhtml += `<td><button class="btn-primary shop-item-button" type="button">Add to Cart</button></td>`
-
+        trhtml += `<td><span class="popuptext hide">Item already in cart!</span><button class="btn-primary shop-item-button popup" type="button">Add to Cart</button></td>`
     })
 
 
@@ -137,11 +136,6 @@ function ready() {
         sessionStorage.setItem("zone", zone);
         window.location.replace(SALES_URL);
     })
-
-    // document.getElementsByClassName('btn-cart-summary')[0].addEventListener('click', function () {
-    //     console.log("Should go to cart summary ");
-    //     window.location.replace(CART_SUMMARY_URL);
-    // })
 
 
 }
@@ -170,17 +164,40 @@ function onAddToCartClicked(event) {
     var category = shopItem.getElementsByClassName('shop-item-category')[0].innerText;
     var title = shopItem.getElementsByClassName('shop-item-title')[0].innerText;
 
+
     var orderType = sessionStorage.getItem("orderTypeStarted");
 
+    if (isItemInCart(parseInt(id))){
+        // console.log("Should fade in now...")
+        var btnParent = button.parentElement
+        //console.log(btnParent)
+        //console.log("First Child:")
+        var child1 = btnParent.firstChild;
+        //console.log(child1)
+        fadeIn(child1);
+        var fadeOutObj = function(){
+            fadeOut(child1);
+        }
+        setTimeout(fadeOutObj,2000)
+    }
+
     if (orderType === "static"){
-        var price = shopItem.getElementsByClassName('shop-item-price')[0].innerText;
-        // addItemToCartForStaticOrder(id, title, category, price, store);
-        //addItemToCartForStaticOrder(id, store);
+        //var price = shopItem.getElementsByClassName('shop-item-price')[0].innerText;
         addItemForStaticOrder(parseInt(id),store,zone)
 
     } else if (orderType === "dynamic"){
         addItemForDynamicOrder(parseInt(id), zone);
     }
+}
+
+function fadeIn(el){
+    el.classList.remove('hide');
+    el.classList.add('show');
+}
+
+function fadeOut(el){
+    el.classList.add('hide');
+    el.classList.remove('show');
 }
 
 function addItemForDynamicOrder(id, zone) {
@@ -198,26 +215,33 @@ function addItemForDynamicOrder(id, zone) {
         .done(ajaxCustomerCart())
 }
 
-
-
-
-function getIndexOfItemInCart(id, title, store) {
+function isItemInCart(id) {
+    console.log("Search cart for item with id="+id)
     var regularCart = JSON.parse(sessionStorage.getItem("regularCart"));
-    console.log(`getRegularItemFromCart() called with params: id=${id}, title=${title}, store=${store}`)
-
-    for (var i = 0; i < regularCart.length; i++) {
-        var itemFromCart = regularCart[i];
-
-        if (itemFromCart.id === id && itemFromCart.store === store && itemFromCart.name === title) {
-            return i;
+    var ans = false;
+    regularCart.forEach(item =>{
+        if (item.id === id){
+            ans = true;
         }
+    })
+    if (ans){
+        console.log("isItemInCart returning true")
+    } else{
+        console.log("isItemInCart returning false")
     }
-    return -1;
+    return ans;
 }
+
 
 
 $(function () { // onload...do
     console.log("\nstoreitems.js")
+
+    $(".btn-purchase").on('click',function () {
+        window.location.replace(CART_SUMMARY_URL);
+    })
+
+
     if (orderType == "static") {
         store = sessionStorage.getItem("store");
         $("#header-txt").text(`Choose Items From ${store}`)

@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
-  <artifact type="exploded-war" name="SDMWebApp:war exploded">
-    <output-path>$PROJECT_DIR$/out/artifacts/SDMWebApp_war_exploded</output-path>
+  <artifact type="exploded-war" name="sdm">
+    <output-path>$PROJECT_DIR$/out/artifacts/sdm</output-path>
     <root id="root">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">

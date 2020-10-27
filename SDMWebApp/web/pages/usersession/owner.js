@@ -72,8 +72,5 @@ $(function() { // onload...do
 
     if (sessionStorage.getItem("role") === "owner"){
         console.log("\nowner.js onload")
-
-        //getCurrentUserCart();
-
     }
 });

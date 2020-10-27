@@ -20,17 +20,19 @@ var messages;
 var lastMessageRead = 0;
 var numberOfUnreadMessages; //this member is unnecessary, but just for keeping track of things we'll keep it for now
 var cart;
-var discountCart = [];
-//var orderHistory = [];
-var orderSummaryVersion = 0;
-var activityVersion = 0;
 var transactions = [];
-var oldBalance;
+var onlineUsersVersion = 0;
+
+//var discountCart = [];
+//var orderHistory = [];
+// var orderSummaryVersion = 0;
+// var activityVersion = 0;
+// var oldBalance;
 
 
 var currentZone;
 
-var printEvery5Calls = 5;
+//var printEvery5Calls = 5;
 
 
 function Item(id,name, amount,category,price,store){
@@ -45,12 +47,12 @@ function Item(id,name, amount,category,price,store){
     this.store = store;
 }
 
-function DiscountUsedOverview(discountName, conditionID, conditionQuantity, totalTimesUsed){
-    this.discountName = discountName;
-    this.conditionID = conditionID;
-    this.conditionQuantity = conditionQuantity;
-    this.totalTimesUsed = totalTimesUsed;
-}
+// function DiscountUsedOverview(discountName, conditionID, conditionQuantity, totalTimesUsed){
+//     this.discountName = discountName;
+//     this.conditionID = conditionID;
+//     this.conditionQuantity = conditionQuantity;
+//     this.totalTimesUsed = totalTimesUsed;
+// }
 
 var showOnce = 0;
 function ajaxCurrentUser() {
@@ -99,11 +101,26 @@ function ajaxUsersList() {
     $.ajax({
         url: USER_LIST_URL,
         success: function(data) {
-            var users = objToStrMap(data);
-            console.log(users)
-            console.log("ajaxUsersList returned data with type:")
-            console.log(typeof users)
-            refreshUsersList(users);
+            console.log("ajaxUsersList returned following:")
+            console.log(data);
+            /*
+            {   onlineVersion: 2,
+                onlineUsers: [{name: "adam", role: "owner"}, ... {name: "johb", role: "customer"}]
+            }
+             */
+
+
+            if (onlineUsersVersion !== data.onlineVersion){
+                sessionStorage.setItem("onlineUsersVersion",data.onlineVersion);
+                sessionStorage.setItem("onlineUsers",JSON.stringify(data.onlineUsers));
+                //refreshUsersList(data.onlineUsers);
+            }
+
+            // var users = objToStrMap(data);
+            // console.log("ajaxUsersList returned following data:")
+            // console.log(users)
+            // console.log(typeof users)
+            //refreshUsersList(users);
         }
     })
         .done(setTimeout(ajaxUsersList,refreshRate))
@@ -130,11 +147,24 @@ function refreshUsersList(users) {
     console.log(users);
 
     var index = 0;
-    users.forEach((role,name)=>{
+    users.forEach((user)=>{
         console.log("Adding user #" + index+ ": " + name + " " + role);
-        $('<li>' + name + "-" + role + '</li>').appendTo($("#userslist"));
+        $('<li>' + user.name + "-" + user.role + '</li>').appendTo($("#userslist"));
         index++;
     })
+}
+
+function createOnlineUsersList(){
+    var users = JSON.parse(sessionStorage.getItem("onlineUsers"));
+    console.log("createOnlineUsersList creating list for folling data:");
+    console.log(users);
+    var list = '';
+
+    var index = 0;
+    users.forEach((user)=>{
+        list += '<li>' + user.name + "-" + user.role + '</li>'
+    })
+    return list;
 }
 
 $(function() { // onload...do

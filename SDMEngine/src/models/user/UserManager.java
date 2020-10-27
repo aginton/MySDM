@@ -10,18 +10,26 @@ public class UserManager {
 
     private final Set<User> userSet;
     private final Set<String> userNameSet;
+    private int onlineVersion;
 
     public UserManager() {
         userNameSet = new HashSet<>();
         userSet = new HashSet<>();
+        onlineVersion = 0;
     }
 
     public synchronized void addUser(String username) {
         userNameSet.add(username);
+        onlineVersion++;
     }
 
     public synchronized void removeUser(String username) {
         userNameSet.remove(username);
+        onlineVersion++;
+    }
+
+    public int getOnlineVersion() {
+        return onlineVersion;
     }
 
     public synchronized Set<String> getUserNames() {
@@ -44,6 +52,7 @@ public class UserManager {
             System.out.println("UserManager created new Owner with name " + username);
         }
         userNameSet.add(username);
+        onlineVersion++;
     }
 
     public User getUserByName(String username){
@@ -59,7 +68,9 @@ public class UserManager {
         HashMap<String,String> res = new HashMap<>();
         userNameSet.forEach(username->{
             User onlineUser = getUserByName(username);
-            res.put(onlineUser.getName(),onlineUser.getRole());
+//            res.put(onlineUser.getName(),onlineUser.getRole());
+            res.put(username,onlineUser.getRole());
+
         });
         return res;
     }

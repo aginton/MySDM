@@ -91,7 +91,6 @@ function onSubmitButtonClick(entitledDiscounts) {
         var formid = "discount-form-" + i;
         var submitid = "btn" + i;
         $(`#${submitid}`).click(function () {
-            alert(`submitting form with name ${formid}`)
             var formData = $(`#${formid}`).serialize();
             console.log("formData:")
             console.log(formData)
@@ -114,35 +113,6 @@ function onSubmitButtonClick(entitledDiscounts) {
 
         })
     })
-    //
-    // $("#discount-form").on('submit',function (e) {
-    //     e.preventDefault()
-    // })
-
-    // $("#discount-form").on('submit',function(e){
-    //     e.preventDefault()
-    //
-    //     // var formData = $(this.form).serialize();
-    //     // console.log("print formData")
-    //     // console.log(formData);
-    //     numberTimesSubmitClicked++;
-    //     $.ajax({
-    //         url: USE_DISCOUNT_URL,
-    //         data: 'POST',
-    //         data: $(this.form).serialize(),
-    //         dataType: 'json',
-    //         success: function (data) {
-    //             console.log("onSubmitButtonClick success, returned following data!")
-    //             console.log(data)
-    //         },
-    //         error: function (error) {
-    //         console.log("sales.js - onSubmitButtonClick error! " + error.message)
-    //         }
-    //     })
-    //         .done(function () {
-    //             ajaxCustomerCart(getEntitledDiscounts)
-    //         })
-    // })
 }
 
 
@@ -178,61 +148,3 @@ $(function() { // onload...do
     getEntitledDiscounts();
 
 });
-
-
-// function createDiscountForms(entitledDiscounts) {
-//     /* [{discountCondition: {id: 1, name: "Ketshop", category: "quantity", quantity: 1}
-//             discountName: "Balabait ishtagea !",
-//             discountOffers: {operator: "ONE-OF", offers: [{quantity: 1, id: 2, name: "Banana", forAdditional: 0, category: "weight"},…]},
-//             entitledTimes: 3
-//             store: "super baba"
-//             }]
-//    */
-//     $("#discounts-list").empty()
-//
-//     var choiceSection = ``;
-//
-//     for (var i =0;i<entitledDiscounts.length; i++){
-//         var discount = entitledDiscounts[i];
-//         var operator = discount.discountOffers.operator;
-//         console.log("discount = data[i] sets discount to:")
-//         console.log(discount)
-//         console.log("operator is " + operator)
-//         var conditionDescription = `If you buy ${discount.discountCondition.quantity}`
-//         var unit = discount.discountCondition.category == "weight" ? "kgs" : "pcks";
-//         conditionDescription += unit + ` of item ${discount.discountCondition.id} (${discount.discountCondition.name}), then you get the following (${discount.discountOffers.operator}):`
-//
-//         var lihtml = `<li><h1>${discount.entitledDiscountName}</h1><p>${conditionDescription}</p>`
-//         var offersList = `<ul>`
-//
-//         for (var j = 0; j<discount.discountOffers.offers.length; j++){
-//             var offer = discount.discountOffers.offers[j];
-//             var offerCategory = offer.category == "weight" ? "kgs" : "pcks";
-//             var offerDescription = `${offer.quantity} ${offerCategory} of item ${offer.id} (${offer.name}) for additional ${offer.forAdditional}`;
-//             offersList += `<li>${offerDescription}</li>`
-//             if (operator == "ONE-OF"){
-//                 choiceSection += `<option value="${offer.name}">${offerDescription}</option>`
-//             }
-//         }
-//         offersList += `</ul>`
-//         lihtml += offersList;
-//         lihtml += `<p>You can use this discount up to ${discount.entitledTimes} times</p>`
-//
-//
-//         lihtml += `<br><br><form id="discount-form">
-//                     <input type="hidden" name="conditionItemId" value="${discount.discountCondition.id}">
-//                     <input type="hidden" name="conditionItemQuantity" value="${discount.discountCondition.quantity}">
-//                    <input type="hidden" name="discountName" value="${discount.discountName}">
-//                    <input type="hidden" name="discountOperator" value="${operator}">
-//                    <input type="hidden" name="zoneName" value="${zone}">
-//                    <input type="hidden" name="storeName" value="${discount.store}">
-//                     `
-//         if (discount.discountOffers.operator == "ONE-OF"){
-//             lihtml += `<label for="offer">Choose an offer:</label><select name="offer" id="offer">` + choiceSection  +`</select>`;
-//         }
-//         lihtml += `<br><br><input type="submit" value="Submit"></form>`
-//     }
-//
-//     $("#discounts-list").append(lihtml)
-//     onSubmitButtonClick()
-// }

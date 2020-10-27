@@ -24,6 +24,7 @@ public class User {
         this.role = role;
         this.balance = 0.0;
         this.transactions = new ArrayList<>();
+        System.out.println();
     }
 
 

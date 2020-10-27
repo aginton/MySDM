@@ -11,7 +11,7 @@ var ZONE_URL = "../page3zone/zone.html";
 
 
 var chatVersion = 0;
-var lastActivityVersionUpdated = 0;
+var onlineUsersVersion = 0;
 var numberTransactionsInTable = 0;
 
 
@@ -172,9 +172,21 @@ function createUploadFileSection(){
     $(".container-column1of2").prepend(content)
 }
 
+function zonesUpdateUsersList(){
+    if (onlineUsersVersion !== sessionStorage.getItem("onlineUsersVersion")){
+        var usersList = createOnlineUsersList();
+        $("#userslist").empty();
+        $("#userslist").html(usersList);
+        onlineUsersVersion = sessionStorage.getItem("onlineUsersVersion");
+    }
+
+    setTimeout(zonesUpdateUsersList,refreshRate);
+}
+
 $(function() {
     ajaxZonesTable();
     ajaxUsersList();
+    zonesUpdateUsersList();
     updateTransactionTable();
 
     role = sessionStorage.getItem("role");

@@ -183,6 +183,5 @@ $(function() { // onload...do
 
         ajaxCustomerCart();
         //getCurrentUserCart();
-
     }
 });

@@ -1,0 +1,12 @@
+.container-column1of2 {
+    float: left;
+    width: 620px;
+    margin: 10px;
+}
+
+
+.container-column2of2 {
+    float: right;
+    width: 300px;
+    margin: 10px;
+}
