@@ -97,7 +97,7 @@ function goToHomepage() {
 
 
 
-function ajaxUsersList() {
+function ajaxUsersList(callback) {
     $.ajax({
         url: USER_LIST_URL,
         success: function(data) {
@@ -123,7 +123,12 @@ function ajaxUsersList() {
             //refreshUsersList(users);
         }
     })
-        .done(setTimeout(ajaxUsersList,refreshRate))
+        .done(function () {
+            setTimeout(ajaxUsersList,refreshRate)
+            if (typeof callback === 'function'){
+                callback();
+            }
+        })
 }
 
 function objToStrMap(obj) {

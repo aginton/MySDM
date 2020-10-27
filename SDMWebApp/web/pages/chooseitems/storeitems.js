@@ -114,7 +114,7 @@ function createStoreItems(data) {
         if (orderType === "static"){
             trhtml += `<td><span class="shop-item-price">${item.price}</span></td>`
         }
-        trhtml += `<td><span class="popuptext hide">Item already in cart!</span><button class="btn-primary shop-item-button popup" type="button">Add to Cart</button></td>`
+        trhtml += `<td><span class="popuptext hide">Item already in cart!</span><br><button class="btn-primary shop-item-button popup" type="button">Add to Cart</button></td>`
     })
 
 

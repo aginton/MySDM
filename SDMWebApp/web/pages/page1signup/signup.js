@@ -25,6 +25,22 @@ $(function () {
     callLogoutServlet();
     //onLoginClicked();
 
+    var chkYes = document.getElementById("chkYes");
+
+    $("form").on('change',function () {
+        var selected_value = $("input[name='role']:checked").val();
+        if (selected_value==='owner'){
+            $("#role-description").text("I don't need to buy things, I just want to open stores and make money!!!")
+            $("#my_image").attr("src","../../common/images/catboss.jpg");
+        }
+
+        if (selected_value==='customer'){
+            $("#role-description").text("I don't care about opening up stores, I just want to buy stuff!!!")
+            $("#my_image").attr("src","../../common/images/dogcustomer.jpg");
+        }
+    })
+
+
     $("form").on("submit", function(event) {
         event.preventDefault();
         var name = $(this).find('[name=username]').val();

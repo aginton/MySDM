@@ -1,8 +1,6 @@
 
 var refreshRate = 5000; //milli seconds
 var USER_LIST_URL = buildUrlWithContextPath("userslist");
-var CHAT_LIST_URL = buildUrlWithContextPath("chat");
-var CURRENT_USER_URL = buildUrlWithContextPath("currentuser");
 
 var UPLOAD_FILE_URL = buildUrlWithContextPath("uploadfile");
 var ZONES_LIST_URL = buildUrlWithContextPath("zoneslist");
@@ -10,7 +8,6 @@ var DEPOSIT_URL = buildUrlWithContextPath("deposit");
 var ZONE_URL = "../page3zone/zone.html";
 
 
-var chatVersion = 0;
 var onlineUsersVersion = 0;
 var numberTransactionsInTable = 0;
 
@@ -129,13 +126,26 @@ function updateTransactionTable() {
 
 function createDepositSection(){
     console.log("creating upload file button")
-    var depositBtn = `<button type="button" id="deposit-btn" onclick="createDepositForm()">Deposit</button><br><br><div id="deposit-section"></div>`
+
+//    <h2 class="h2inline">To start a dynamic order, </h2><button type="button" id="dynamic-order-btn">Click Here</button><h2 class="h2inline">!</h2>
+
+
+    var depositBtn = `<p class="p-inline">Want to deposit money? Click here: <button type="button" id="deposit-btn" onclick="createDepositForm()">Deposit</button></p><br><br><div id="deposit-section"></div>`
 
     $(".container-column1of2").prepend(depositBtn)
 
 }
 
+function isEmpty() {
+    return ($("div.container-deposit").length === 0);
+}
+
 function createDepositForm() {
+    if (!isEmpty()){
+        console.log("Form already on screen!")
+        return;
+    }
+
     var content = `<div class="container-deposit">
                 <form id="deposit-form">
                     <p>Enter deposit amount:</p>
@@ -172,21 +182,29 @@ function createUploadFileSection(){
     $(".container-column1of2").prepend(content)
 }
 
-function zonesUpdateUsersList(){
+// function zonesUpdateUsersList(){
+//     if (onlineUsersVersion !== sessionStorage.getItem("onlineUsersVersion")){
+//         var usersList = createOnlineUsersList();
+//         $("#userslist").empty();
+//         $("#userslist").html(usersList);
+//         onlineUsersVersion = sessionStorage.getItem("onlineUsersVersion");
+//     }
+//     setTimeout(zonesUpdateUsersList,refreshRate);
+// }
+
+function createUsersList(){
     if (onlineUsersVersion !== sessionStorage.getItem("onlineUsersVersion")){
         var usersList = createOnlineUsersList();
         $("#userslist").empty();
         $("#userslist").html(usersList);
         onlineUsersVersion = sessionStorage.getItem("onlineUsersVersion");
     }
-
-    setTimeout(zonesUpdateUsersList,refreshRate);
 }
 
 $(function() {
     ajaxZonesTable();
-    ajaxUsersList();
-    zonesUpdateUsersList();
+    ajaxUsersList(createUsersList);
+    // zonesUpdateUsersList();
     updateTransactionTable();
 
     role = sessionStorage.getItem("role");
@@ -198,6 +216,4 @@ $(function() {
     if (role === "customer"){
         createDepositSection();
     }
-
-    //triggerAjaxChatContent();
 });

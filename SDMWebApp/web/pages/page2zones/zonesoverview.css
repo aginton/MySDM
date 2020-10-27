@@ -1,14 +1,3 @@
-#chatarea {
-    overflow-y: scroll;
-    max-height: 100px;
-}
-
-.smiley-image {
-    width: 20px;
-    height: 20px;
-}
-
-
 table {
     margin: 25px 0;
     /*width: 200px;*/
@@ -43,33 +32,29 @@ table#zones-table tbody tr {
 
 
 
-/*body {*/
-/*    width: 960px;*/
-/*    font-family: Arial, Verdana, sans-serif;*/
-/*    color: #665544;*/
-/*}*/
-
 .container-column1of2 {
     float: left;
-    width: 620px;
-    margin: 10px;
+    width: 80%;
+    /*width: 620px;*/
+    margin-right: 20px;
 }
 
 
 .container-column2of2 {
     float: right;
-    width: 300px;
-    margin: 10px;
+    /*width: 300px;*/
+    margin-left: 10px;
+    width: 15%;
 }
 
-/*!* Icon when the collapsible content is shown *!*/
-/*.btn:after {*/
-/*    font-family: "Glyphicons Halflings";*/
-/*    content: "\e114";*/
-/*    float: right;*/
-/*    margin-left: 15px;*/
-/*}*/
-/*!* Icon when the collapsible content is hidden *!*/
-/*.btn.collapsed:after {*/
-/*    content: "\e080";*/
-/*}*/
+.main{
+    display: flex;
+    padding-left: 20px;
+    padding-right: 20px;
+
+}
+
+.p-inline {
+    display: inline-block;
+    margin: 0;
+}

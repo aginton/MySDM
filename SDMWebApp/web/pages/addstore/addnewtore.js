@@ -4,6 +4,7 @@ var zone = sessionStorage.getItem("zone");
 var username = sessionStorage.getItem("username");
 var zoneVersion = 0;
 
+//TODO: Sometimes says, "please enter a valid price for item 4" even if item 4 not selected!
 function validateFields(form) {
 
     console.log("validating storename: " + form["storeName"].value)
@@ -90,6 +91,9 @@ function createChooseStoreItemsTable(entries) {
     entries is array of form:
     [{  id:_ , name:_ , category: _, averagePrice: _, numberTimesSold: _}, {...},...]
      */
+
+    entries.sort(compareItemID);
+
     var trHTML ='';
 
 
@@ -131,6 +135,9 @@ function getInventoryForZone() {
              data will arrive in the next form:
             [{  id:_ , name:_ , category: _, averagePrice: _, numberTimesSold: _}, {...},...]
              */
+            console.log("MAA")
+            console.log(data.entries)
+
             createChooseStoreItemsTable(data.entries);
 
         },
