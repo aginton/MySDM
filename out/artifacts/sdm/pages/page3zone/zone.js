@@ -426,6 +426,12 @@ $(function() { // onload...do
             }
         }
         if (role === "owner"){
+            $("#view-feedbacks-section").html(`<button type="button" id="view-feedbacks-btn">View Feedbacks</button>`)
+
+            $("#view-feedbacks-btn").on('click',function () {
+                ajaxFeedbackByZone(zone)
+            });
+
             $("#zone-table-message").html(`<h2>To add a new store, <a href="../addstore/addstore.html">click here</a></h2>`)
             ajaxOwner();
             var ordersObj = function(){

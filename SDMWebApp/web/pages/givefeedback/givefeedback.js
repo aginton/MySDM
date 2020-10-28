@@ -113,58 +113,58 @@ $(function() {
     onSkipClick();
 
 
-    $("#leavefeedbackform").submit(function(e) {
+        $("#leavefeedbackform").submit(function(e) {
 
-        e.preventDefault();
+            e.preventDefault();
 
-        var form = document.getElementById('leavefeedbackform');
-        //console.log("printing the feedbacks array before the ajax call:");
-        var dataToPass = (feedbackFormToJSON(form.elements)).feedbacks;
-        console.log("printing dataToPass:");
-        console.log(dataToPass);
-        console.log("--------------------------------")
+            var form = document.getElementById('leavefeedbackform');
+            //console.log("printing the feedbacks array before the ajax call:");
+            var dataToPass = (feedbackFormToJSON(form.elements)).feedbacks;
+            console.log("printing dataToPass:");
+            console.log(dataToPass);
+            console.log("--------------------------------")
 
-        /*data sent to servlet in format:
-        {
-        "customer": "Moshe",
-        "zone": "HaSharon",
-        "feedbacks": [{"storename": "Maxstock",
-                       "rate": "4",
-                       "comments: "Great experience!"}, ...]
-        }
-        */
-
-        /*data returned from servlet in format:
+            /*data sent to servlet in format:
             {
-                ???
-             }
-
-         */
-
-        $.ajax({
-            type: "POST",
-            url: LEAVE_FEEDBACK_URL,
-            data: {"customer": customer,
-                "zone": zone,
-                "feedbacks": JSON.stringify(dataToPass)},
-            success: function (data) {
-                console.log("ajax call success on leave feedback, returned following data:!");
-                console.log(data)
-                if (data) {
-                    alert("Thank you for the feedback! \n returning to zone page...");
-                    window.location = "../page3zone/zone.html";
-                }
-
-                else {              //chosen location is not available
-                    //      alert("Unavailable location:\n There is already a store in (" + data.loc[0] + "," + data.loc[1] + ")");
-                    alert("something blah blah");
-                }
-            },
-            error: function (data) {
-                console.log("error occured on leave feedback ajax call");
-                alert("Unable to leave feedback. :(");
+            "customer": "Moshe",
+            "zone": "HaSharon",
+            "feedbacks": [{"storename": "Maxstock",
+                           "rate": "4",
+                           "comments: "Great experience!"}, ...]
             }
+            */
 
+                /*data returned from servlet in format:
+                    {
+                        ???
+                     }
+
+                 */
+
+                $.ajax({
+                    type: "POST",
+                    url: LEAVE_FEEDBACK_URL,
+                    data: {"customer": customer,
+                           "zone": zone,
+                           "feedbacks": JSON.stringify(dataToPass)},
+                    success: function (data) {
+                        console.log("ajax call success on leave feedback, returned following data:!");
+                        console.log(data)
+                        if (data) {
+                            alert("Thank you for the feedback! \n returning to zone page...");
+                            window.location = "../page3zone/zone.html";
+                        }
+
+                        else {              //chosen location is not available
+                      //      alert("Unavailable location:\n There is already a store in (" + data.loc[0] + "," + data.loc[1] + ")");
+                            alert("something blah blah");
+                        }
+                    },
+                    error: function (data) {
+                        console.log("error occured on leave feedback ajax call");
+                        alert("Unable to leave feedback. :(");
+                    }
+
+                })
         })
-    })
 })

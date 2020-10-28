@@ -1,5 +1,6 @@
 var OWNER_URL=buildUrlWithContextPath("currentowner")
 var OWNER_ORDERS_URL=buildUrlWithContextPath("ownerorders")
+var OWNER_FEEDBACK_BY_ZONE_URL = buildUrlWithContextPath("feedbackbyzone");
 
 var lastNotificationAdded = 0;
 
@@ -35,6 +36,21 @@ function ajaxOwner(){
         }
     })
     setTimeout(ajaxOwner,refreshRate)
+}
+
+function ajaxFeedbackByZone(zone) {
+    $.ajax({
+        url: OWNER_FEEDBACK_BY_ZONE_URL,
+        data: {"zone": zone},
+        dataType: 'json',
+        success: function (data) {
+            console.log("FeedbackByZone success, returned following:")
+            console.log(data);
+        },
+        error: function (error) {
+            console.log("FeedbackByZone error - " + error.message);
+        }
+    })
 }
 
 function ajaxOwnerOrders(callback){
