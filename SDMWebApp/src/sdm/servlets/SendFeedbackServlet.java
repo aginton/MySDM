@@ -1,8 +1,8 @@
 package sdm.servlets;
 
 import com.google.gson.*;
-import models.order.Feedback;
 import models.order.eRate;
+import models.store.Feedback;
 import models.store.Store;
 import models.user.Owner;
 import models.user.UserManager;
@@ -18,11 +18,12 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 @WebServlet(name = "FeedbackServlet", urlPatterns = { "/leavefeedback" })
-public class FeedbackServlet extends HttpServlet {
+public class SendFeedbackServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -48,7 +49,7 @@ public class FeedbackServlet extends HttpServlet {
     */
 
         System.out.println("FeedbackServlet called");
-        response.setContentType("application/json");
+        //response.setContentType("application/json");
 
         //parsing json data in request
         String customerName = request.getParameter("customer");
@@ -58,63 +59,42 @@ public class FeedbackServlet extends HttpServlet {
 
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         String feedbacks = request.getParameter("feedbacks");
-        System.out.println("is feedbacks null?");
-        System.out.println(feedbacks == null);
+        System.out.println("is feedbacks null?: ");
+        System.out.println(feedbacks==null);
+        System.out.println("Now what...");
+        FeedbackJS[] items = gson.fromJson(feedbacks, FeedbackJS[].class);
+        System.out.println("We made it");
+        System.out.println("FeedbackJS[] size is: " + items.length);
 
-
-//        for (FeedbackJS fb : feedbacksjs) {
-//            System.out.println(fb);
-//        }
-
-
-
-
-//        List<String> feedbacksArr = Arrays.asList(feedbacks);
-//        for(String part: feedbacksArr) { System.out.println(part); }
-
-        //List<String> parameterNames = new ArrayList<>(request.getParameterMap().keySet());
-        //System.out.println(parameterNames);
-//        List<String> itemsToPricesList = Arrays.asList(itemsToPricesArr);
-//        for(String part: itemsToPricesList) {
-//            System.out.println(part);
-//        }
-
-        //load the zone manager
         ZonesManager zonesManager = ServletUtils.getZoneManager(getServletContext());
         Zone zone = zonesManager.getZoneByName(zoneName);
-        System.out.println("zone manager loaded");
+        for (FeedbackJS feedbackJS: items){
+            System.out.println(feedbackJS);
+            String storeName = feedbackJS.getStorename();
+            Store store = zone.getStoreByName(storeName);
+            Feedback feedback = new Feedback(customerName,storeName,feedbackJS.getRate(),feedbackJS.getComments());
+            store.addFeedbackAndNotifyOwner(feedback);
+        }
 
-        //load the user manager
-        UserManager userManager = ServletUtils.getUserManager(getServletContext());
-        System.out.println("user manager loaded");
-
-        //2. for each feedback:
-        //2.1 store name->search store by storename and get its owner
-        //2.2
-
-
-        //response
-//        Gson gson = new Gson();
-//        jsonResponse jsonResponse = new jsonResponse(wasStoreCreated,isLocationAvailable, loc, storeName, numOfItemsSoldInStore, totalNumOfItemsInZone);
-//        String jsonObject = gson.toJson(jsonResponse);
-//
-//        try (PrintWriter out = response.getWriter()) {
-//            out.print(jsonObject);
-//            out.flush();
-//        }
     }
-
-     private static class FeedbackWrapperJS {
-
-        FeedbackJS[] feedbacks;
-
-     }
 
      private static class FeedbackJS {
 
-        String storename;
-        String rate;
-        String comments;
+        private String storename;
+        private int rate;
+        private String comments;
+
+         public String getStorename() {
+             return storename;
+         }
+
+         public int getRate() {
+             return rate;
+         }
+
+         public String getComments() {
+             return comments;
+         }
 
          @Override
          public String toString() {

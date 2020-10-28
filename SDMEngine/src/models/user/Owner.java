@@ -1,6 +1,6 @@
 package models.user;
 
-import models.order.Feedback;
+import models.store.Feedback;
 import models.store.Store;
 
 import java.util.ArrayList;
@@ -26,4 +26,15 @@ public class Owner extends User {
         return stores;
     }
 
+    public List<Feedback> getFeedbacksForZone(String zoneName) {
+        List<Feedback> res = new ArrayList<>();
+        for (Store store: stores){
+            if (store.getZone().getZoneName().equals(zoneName)){
+                for (Feedback feedback: store.getFeedbacks()){
+                    res.add(feedback);
+                }
+            }
+        }
+        return res;
+    }
 }

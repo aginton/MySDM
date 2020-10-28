@@ -309,4 +309,10 @@ public class Store {
         }
         return null;
     }
+
+    public void addFeedbackAndNotifyOwner(Feedback feedback) {
+        feedbacks.add(feedback);
+        String notification = "Feedback left for store " + feedback.getStore() + " by customer " + feedback.getCustomer();
+        owner.getNotifications().add(notification);
+    }
 }
