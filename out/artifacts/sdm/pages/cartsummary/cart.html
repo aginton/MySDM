@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Cart Summary</title>
+        <script src="../../common/jquery-3.5.1.min.js"></script>
+        <link rel="stylesheet" href="../../common/styles/style.css">
+        <script src="../header/header.js"></script>
+        <script src="../util/util.js"></script>
+        <script src="../../common/context-path-helper.js"></script>
+        <script src="../usersession/customer.js"></script>
+        <script src="../usersession/currentsession.js"></script>
+        <script src="cart.js"></script>
+        <link rel="stylesheet" href="cart.css">
+    </head>
+    <body>
+
+        <div id="site">
+            <header id="masthead">
+            </header>
+            <div id="content">
+                <h1>Your Shopping Cart</h1>
+                <form id="shopping-cart" action="cart.html" method="post">
+                    <table class="shopping-cart" id="table-cart-summary">
+                        <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Item</th>
+                            <th scope="col">CATEGORY</th>
+                            <th scope="col">Qty</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">STORE</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+
+                    <br><br>
+
+                    <table class="shopping-cart" id="table-discount-summary">
+                        <thead>
+                        <tr>
+                            <th scope="col">STORE</th>
+                            <th scope="col">DISCOUNT</th>
+                            <th scope="col">OFFERS</th>
+                            <th scope="col">TIMES USED</th>
+                            <th scope="col">DECREMENT</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                    <p id="sub-total">
+                        <strong>Sub Total</strong>: <span id="stotal"></span>
+                    </p>
+                    <br><br>
+                    <div id="position-section">
+                        <label for="x-choice">Enter x position:</label>
+                        <select name="x-position" id="x-choice">
+                            <option value="1" selected="selected">1</option>
+                        </select>
+
+                        <label for="y-choice">Enter y position:</label>
+                        <select name="y-position" id="y-choice">
+                            <option value="1" selected="selected">1</option>
+                        </select>
+                    </div>
+
+                    <ul id="shopping-cart-actions">
+                        <li>
+                            <input type="button" name="update" id="update-cart" class="btn" value="Update Cart" />
+                        </li>
+                        <li>
+                            <input type="submit" name="delete" id="empty-cart" class="btn" value="Empty Cart" />
+                        </li>
+                        <li>
+                            <input type="button" name="confirm" id="confirm-order" class="btn" value="Confirm Order" />
+                        </li>
+                        <li>
+                            <a href="../chooseitems/storeitems.html" class="btn">Continue Shopping</a>
+                        </li>
+                        <li>
+                            <a href="../choosediscounts/sales.html" class="btn">Go To Sales</a>
+                        </li>
+<!--                        <li>-->
+<!--                            <a class="btn">Go To Checkout</a>-->
+<!--                        </li>-->
+                        <li>
+                            <a href="../page3zone/zone.html" class="btn">Back to selected zone</a>
+                        </li>
+                        <li>
+                            <a href="../page2zones/zonesoverview.html" class="btn">Back to all zone</a>
+                        </li>
+                    </ul>
+                </form>
+            </div>
+
+
+
+        </div>
+    </body>
+</html>
