@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.Map;
 
 @WebServlet(name = "FeedbackServlet", urlPatterns = { "/leavefeedback" })
-public class SendFeedbackServlet extends HttpServlet {
+public class LeaveFeedbackServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -48,7 +48,7 @@ public class SendFeedbackServlet extends HttpServlet {
     }
     */
 
-        System.out.println("FeedbackServlet called");
+        System.out.println("LeaveFeedbackServlet called");
         //response.setContentType("application/json");
 
         //parsing json data in request
@@ -75,7 +75,6 @@ public class SendFeedbackServlet extends HttpServlet {
             Feedback feedback = new Feedback(customerName,storeName,feedbackJS.getRate(),feedbackJS.getComments());
             store.addFeedbackAndNotifyOwner(feedback);
         }
-
     }
 
      private static class FeedbackJS {

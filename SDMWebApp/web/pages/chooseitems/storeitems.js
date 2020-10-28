@@ -150,10 +150,10 @@ $(".btn-sales").on('click', function () {
 $(".btn-cart-summary").on('click', function () {
     window.location.replace(CART_SUMMARY_URL);
 })
-
-$(".btn-update-cart").on('click', function () {
-    checkIfAmountInputsValid();
-})
+//
+// $(".btn-update-cart").on('click', function () {
+//     checkIfAmountInputsValid();
+// })
 
 
 //TODO: Add a quantity input

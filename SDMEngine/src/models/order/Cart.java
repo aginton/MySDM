@@ -102,6 +102,14 @@ public class Cart {
         return cartItems.stream().filter(item->item.getItemID()==itemToAdd.getItemID()).findFirst().orElse(null);
     }
 
+    public void setTotalNumberItems(int totalNumberItems) {
+        this.totalNumberItems = totalNumberItems;
+    }
+
+    public void setTotalNumberItemsByType(int totalNumberItemsByType) {
+        this.totalNumberItemsByType = totalNumberItemsByType;
+    }
+
     public void addItemToCart(CartItem itemToAdd){
         //System.out.println(TAG + " - LINE 74");
 

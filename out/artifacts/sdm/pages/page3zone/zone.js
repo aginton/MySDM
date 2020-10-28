@@ -426,7 +426,9 @@ $(function() { // onload...do
             }
         }
         if (role === "owner"){
-            $("#view-feedbacks-section").html(`<button type="button" id="view-feedbacks-btn">View Feedbacks</button>`)
+            var feedbackTable = createFeedbackTable();
+            $("#feedback-table-section").html(feedbackTable);
+            $("#view-feedbacks-section").html(`<button type="button" class="btn btn-primary" id="view-feedbacks-btn">View Feedbacks</button>`)
 
             $("#view-feedbacks-btn").on('click',function () {
                 ajaxFeedbackByZone(zone)

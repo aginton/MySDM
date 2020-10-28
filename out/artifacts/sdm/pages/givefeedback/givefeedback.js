@@ -147,24 +147,14 @@ $(function() {
                     data: {"customer": customer,
                            "zone": zone,
                            "feedbacks": JSON.stringify(dataToPass)},
-                    success: function (data) {
-                        console.log("ajax call success on leave feedback, returned following data:!");
-                        console.log(data)
-                        if (data) {
-                            alert("Thank you for the feedback! \n returning to zone page...");
-                            window.location = "../page3zone/zone.html";
-                        }
-
-                        else {              //chosen location is not available
-                      //      alert("Unavailable location:\n There is already a store in (" + data.loc[0] + "," + data.loc[1] + ")");
-                            alert("something blah blah");
-                        }
+                    success: function () {
+                        alert("Thank you for the feedback! \n returning to zone page...");
+                        window.location = "../page3zone/zone.html";
                     },
                     error: function (data) {
-                        console.log("error occured on leave feedback ajax call");
+                        console.log("error occured on leave feedback ajax call - " + data.message);
                         alert("Unable to leave feedback. :(");
                     }
-
                 })
         })
 })
