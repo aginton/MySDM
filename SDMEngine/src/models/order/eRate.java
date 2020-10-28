@@ -5,7 +5,7 @@ public enum eRate {
 
     private int value;
 
-    private eRate(int value) {
+    eRate(int value) {
         this.value = value;
     }
 

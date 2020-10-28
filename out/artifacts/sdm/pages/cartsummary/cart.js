@@ -261,7 +261,7 @@ function onConfirmOrderClick(){
             console.log(data);
             if (data === true){
                 alert("Order successfully created!")
-                emptyCartInProgress(goToHomepage)
+                emptyCartInProgress(goToLeaveFeedbackPage())
             } else{
                 alert("This location is currently taken. Please enter a different location and try again.")
             }

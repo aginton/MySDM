@@ -21,22 +21,23 @@ function ajaxCustomerCart(callback) {
                             storeName: "Rami",
                             discountOperator: "ONE-OF",
                             offersChosen: [ {id: 1, name: "Toilet Paper", forAdditional: 0, quantity: 1, category: "quantity"}, ...{}],
-                            timesUsed: 1}, ...{…}]
+                            timesUsed: 1}, ...{…}],
+            participatingStores: [{id: 2, name: "Menashe Hagadol"}, {id: 3, name: "Rami Levi"},...]
             }
              */
 
-            console.log("ajaxCustomerCart success, returned data:")
-            console.log(data)
+            console.log("ajaxCustomerCart success, returned data:");
+            console.log(data);
 
-
-            sessionStorage.setItem("regularCart", JSON.stringify(data.cartItems))
-            sessionStorage.setItem("discountsUsed", JSON.stringify(data.usedDiscounts) )
+            sessionStorage.setItem("regularCart", JSON.stringify(data.cartItems));
+            sessionStorage.setItem("discountsUsed", JSON.stringify(data.usedDiscounts));
 
             //var discountsUsedOverview = createDiscountsUsedOverview(data.discountUsedJSList);
-            sessionStorage.setItem("mapDiscountNamesToTimesUsed", JSON.stringify(data.mapDiscountNamesToTimesUsed))
+            sessionStorage.setItem("mapDiscountNamesToTimesUsed", JSON.stringify(data.mapDiscountNamesToTimesUsed));
             sessionStorage.setItem("discountsUsedOverview", JSON.stringify(data.discountOverviews));
             sessionStorage.setItem("numberCartItemsByType",  data.numberItemsByType);
             sessionStorage.setItem("currentCart", JSON.stringify(data));
+            sessionStorage.setItem("participatingStores", JSON.stringify(data.participatingStores));
             updateNumberCartItemsBadge(data.numberItemsByType)
         },
         error: function(error) {
@@ -56,7 +57,8 @@ function ajaxCustomerCart(callback) {
 function saveCartAtServer(items, callback){
 
     var zone = sessionStorage.getItem("zone");
-
+    console.log("ITEMS|||||||||||||||||||||");
+    console.log(items);
     $.ajax({
         url: SAVE_CURRENT_CART_URL,
         data: {"zone":zone,

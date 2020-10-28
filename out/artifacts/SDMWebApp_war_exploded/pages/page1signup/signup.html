@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Online Chat</title>
+
+
+        <link rel="stylesheet" href="../../common/bootstrap/css/bootstrap.min.css">
+        <script src="../../common/jquery-3.5.1.min.js"></script>
+        <script src="../../common/context-path-helper.js"></script>
+        <script src="signup.js"></script>
+
+
+
+
+    </head>
+    <body>
+        <div class="container">
+            <h1>Welcome to the Online Chat</h1>
+            <br/>
+            <h2>Please enter a unique user name:</h2>
+            <form name="userinfoform" id="userinfoform" >
+                <input type="text" name="username" class=""/>
+                <p>Please select your role:</p>
+                <input type="radio" id="customer" name="role" value="customer">
+                <label for="customer">Customer</label><br>
+                <input type="radio" id="owner" name="role" value="owner">
+                <label for="owner">Owner</label><br>
+                <input type="submit" value="Login"/>
+            </form>
+        </div>
+
+        <br><br>
+        <div>
+            <p id="servlet-response"></p>
+        </div>
+    </body>
+</html>

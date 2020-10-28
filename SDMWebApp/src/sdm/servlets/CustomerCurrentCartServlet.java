@@ -37,7 +37,7 @@ public class CustomerCurrentCartServlet extends HttpServlet {
 
         //returning JSON objects, not HTML
         response.setContentType("application/json");
-       // System.out.println(TAG);
+        // System.out.println(TAG);
         try (PrintWriter out = response.getWriter()) {
             Gson gson = new Gson();
             UserManager userManager = ServletUtils.getUserManager(getServletContext());
@@ -61,19 +61,23 @@ public class CustomerCurrentCartServlet extends HttpServlet {
         private double subtotal;
         private int numberItems;
         private int numberItemsByType;
+        private Set<StoreDetailsJS> participatingStores;
 
         public CartJS(Cart cart){
             //System.out.println(" CARTJS for cart with cartItems = " + cart.getCartItems() + " and usedDiscounts = " + cart.getUsedDiscounts());
             //System.out.println("CURRENTCUSTOMERSERVLET LINE 83");
+            System.out.println("in cartJS constructor");
             numberItems = cart.getTotalNumberItems();
             numberItemsByType = cart.getTotalNumberItemsByType();
             subtotal = cart.getSubtotal();
             cartItems = new HashSet<>();
             usedDiscounts = new HashSet<>();
             discountOverviews = new HashSet<>();
-            //System.out.println("BBBBBBBBB");
+            participatingStores = new HashSet<>();
+
+            System.out.println("BBBBBBBBB");
             cart.getCartItems().forEach(cartItem -> {
-              //  System.out.println("CurrentCustomerServlet LINE 90");
+                //  System.out.println("CurrentCustomerServlet LINE 90");
                 cartItems.add(new CartItemJS(cartItem));
                 //System.out.println("CurrentCustomerServlet LINE 92");
             });
@@ -88,6 +92,14 @@ public class CustomerCurrentCartServlet extends HttpServlet {
                 discountOverviews.add(new DiscountOverview(discountName,condition,mapDiscountNamesToTimesUsed.get(discountName)));
 
             }
+            System.out.println("before updating names of participating stores");
+            cart.getCartItems().forEach(cartItem -> {
+                int storeIdForItem = cartItem.getStore().getStoreId();
+                String storeNameForItem = cartItem.getStore().getStoreName();
+                StoreDetailsJS storeToAdd = new StoreDetailsJS(storeIdForItem,storeNameForItem);
+                participatingStores.add(storeToAdd);
+            });
+            System.out.println("the set: " + participatingStores);
         }
 
         private DiscountCondition getConditionByDiscountName(String discountName, Set<UsedDiscount> usedDiscounts) {
@@ -158,7 +170,7 @@ public class CustomerCurrentCartServlet extends HttpServlet {
             offersChosen = new HashSet<>();
             //System.out.println("CurrentCustomerServlet LINE 133");
             for (DiscountOffer offer: usedDiscount.getOffersChosen()){
-              //  System.out.println("CurrentCustomerServlet LINE 135");
+                //  System.out.println("CurrentCustomerServlet LINE 135");
                 offersChosen.add(new DiscountOfferJS(offer));
             }
             timesUsed = usedDiscount.getTimesUsed();
@@ -182,6 +194,31 @@ public class CustomerCurrentCartServlet extends HttpServlet {
             quantity = offer.getQuantity();
             forAdditional = offer.getForAdditional();
             //System.out.println("CurrentCustomerServlet LINE 154");
+        }
+    }
+
+    private static class StoreDetailsJS {
+
+        private int id;
+        private String name;
+
+        public StoreDetailsJS(int id, String name) {
+            this.id = id;
+            this.name = name;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (!(o instanceof StoreDetailsJS)) return false;
+            StoreDetailsJS that = (StoreDetailsJS) o;
+            return id == that.id &&
+                    name.equals(that.name);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(id, name);
         }
     }
 

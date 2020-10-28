@@ -3,13 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <title>Give feedback</title>
+    <script src="../../common/jquery-3.5.1.min.js"></script>
+    <script src="../../common/context-path-helper.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://kit.fontawesome.com/511b59c762.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../../common/bootstrap/css/bootstrap.min.css">
+    <script src="../../common/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../util/util.js"></script>
+    <script src="../usersession/currentsession.js"></script>
+    <script src="../header/header.js"></script>
+    <script src="givefeedback.js"></script>
+    <link rel="stylesheet" href="givefeedback.css">
+    <link rel="stylesheet" href="../../common/styles/style.css">
+
+
 </head>
 <body>
 
-<h1>Feedback</h1>
-<div id="feedback_container" class="container">
-    
-</div>
+<h1>Leave feedback about this order</h1>
+
+
+<script>
+    const btn = document.querySelector("button");
+const post = document.querySelector(".post");
+const widget = document.querySelector(".star-widget");
+btn.onclick = ()=>{
+    widget.style.display = "none";
+    post.style.display = "block";
+    return false;
+}</script>
 
 </body>
 </html>

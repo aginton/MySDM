@@ -12,6 +12,7 @@ var EMPTY_USER_CART_IN_PROGRESS = buildUrlWithContextPath("emptycart");
 var ADD_ITEM_STATIC_ORDER_URL = buildUrlWithContextPath("additemstaticorder");
 var REMOVE_DISCOUNT_URL = buildUrlWithContextPath("decrementdiscount");
 var HOMEPAGE_URL = "../page2zones/zonesoverview.html";
+var LEAVE_FEEDBACK_URL = "../givefeedback/givefeedback.html";
 
 var userName;
 var role;
@@ -89,6 +90,9 @@ function ajaxCurrentUser() {
         })
 }
 
+function goToLeaveFeedbackPage() {
+    window.location.replace(LEAVE_FEEDBACK_URL);
+}
 
 
 function goToHomepage() {
