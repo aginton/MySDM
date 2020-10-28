@@ -26,8 +26,9 @@
 
         <div id="main-container">
             <h1 id="welcome-msg">Welcome to zoneview!</h1>
-
-            <table id="zone-items-table">
+            <br><br>
+            <h2>Items Sold In Zone</h2>
+            <table id="zone-items-table" class="center-table table table-hover">
             <caption>Items Sold in Zone</caption>
             <thead>
             <tr>
@@ -69,8 +70,9 @@
 
         <br><br>
 
-        <table id="user-orders-table">
-            <caption>Customer Order History</caption>
+            <h2>Order History</h2>
+        <h3>Click on row corresponding to order you wish to see details for.</h3>
+        <table id="user-orders-table" class="center-table table table-hover">
             <thead>
             <tr>
                 <th>Order ID</th>
@@ -88,26 +90,64 @@
         </table>
 
         <br><br>
+            <div id="order-details-section">
 
-        <table id="user-order-details-table">
-            <caption>Order Details</caption>
-            <thead>
-            <tr>
-                <th>Item ID</th>
-                <th>Name</th>
-                <th>Category</th>
-                <th>Store Ordered From (id+name)</th>
-                <th>Amount</th>
-                <th>Unit Cost</th>
-                <th>Cost</th>
-                <th>On Discount?</th>
-            </tr>
-            </thead>
+                <div class="modal" id="OrderDetailsModal">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Order Details</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
 
-            <tbody>
+                            <div class="modal-body">
+                                <table id="order-details-table" class="table table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th>Item ID</th>
+                                        <th>Name</th>
+                                        <th>Category</th>
+                                        <th>Store Ordered From (id+name)</th>
+                                        <th>Amount</th>
+                                        <th>Unit Cost</th>
+                                        <th>Cost</th>
+                                        <th>On Discount?</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
 
-            </tbody>
-        </table>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+<!--        <table id="order-details-table">-->
+<!--            <caption>Order Details</caption>-->
+<!--            <thead>-->
+<!--            <tr>-->
+<!--                <th>Item ID</th>-->
+<!--                <th>Name</th>-->
+<!--                <th>Category</th>-->
+<!--                <th>Store Ordered From (id+name)</th>-->
+<!--                <th>Amount</th>-->
+<!--                <th>Unit Cost</th>-->
+<!--                <th>Cost</th>-->
+<!--                <th>On Discount?</th>-->
+<!--            </tr>-->
+<!--            </thead>-->
+
+<!--            <tbody>-->
+
+<!--            </tbody>-->
+<!--        </table>-->
 
 
         <section id="orderFromStore">

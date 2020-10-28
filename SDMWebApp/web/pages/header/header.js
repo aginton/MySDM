@@ -10,7 +10,6 @@ var balance = sessionStorage.getItem("balance");
 
 var $bell;
 
-
 function createHeaderForCustomer(){
 
     var content = `

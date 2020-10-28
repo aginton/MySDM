@@ -5,18 +5,19 @@ var ZONE_STORES_URL = buildUrlWithContextPath("zonestores");
 var CUSTOMER_ORDER_DETAILS_URL = buildUrlWithContextPath("orderdetails");
 var STORE_ORDER_DETAILS_URL = buildUrlWithContextPath("storeorderdetails");
 
+var STOREITEMS_URL = "../chooseitems/storeitems.html";
 
 var zone = sessionStorage.getItem("zone");
+var role = sessionStorage.getItem("role");
+
 currentZone = zone;
-var STOREITEMS_URL = "../chooseitems/storeitems.html";
 var zoneVersion = 0;
 var zoneStores = [];
-var role;
+
 var orderHistoryForZone;
 
-
-
 var showZoneItemsOnce = 0;
+
 function ajaxZoneItems() {
     //console.log("\najaxZoneContent called")
     $.ajax({
@@ -362,7 +363,7 @@ function ajaxStoreOrderDetails(rowIndex) {
 }
 
 function createOrderDetailsTable(data) {
-
+    data.sort(compareStoreBroughtFromAndIds);
     console.log(data);
     /*
              data will arrive in the next form:
@@ -384,8 +385,12 @@ function createOrderDetailsTable(data) {
         <td>${item.amountOrdered}</td><td>${item.unitPrice}</td><td>${item.cost}</td><td>${item.isPartOfDiscount}</td></tr>
         `
     })
-    $('#user-order-details-table tbody').empty().html(rows)
+    $('#order-details-table tbody').empty().html(rows)
+
+     $("#OrderDetailsModal").modal('show');
 }
+
+
 
 function getZoneItemsAndStores(){
     ajaxZoneItems();
@@ -400,8 +405,6 @@ function getZoneItemsAndStores(){
 
 $(function() { // onload...do
     console.log("zone.js onload ")
-    role = sessionStorage.getItem("role");
-    zone = sessionStorage.getItem("zone")
 
     if (zone === "" || zone === null){
         var content = `<h1>NO ZONE SELECTED!</h1>`
@@ -409,22 +412,27 @@ $(function() { // onload...do
         $('body').append(content)
 
     } else{
+
+
         $("#welcome-msg").text(`${zone} - Overview`)
 
         getZoneItemsAndStores();
 
         if (role === "customer"){
             $("#zone-table-message").html(`<h2>To start a static order, click on the row for the store you wish to order from.</h2>
-            <h2 class="h2inline">To start a dynamic order, </h2><button type="button" id="dynamic-order-btn">Click Here</button><h2 class="h2inline">!</h2>
-        `)
+            <h2 class="h2inline">To start a dynamic order, </h2><button type="button" id="dynamic-order-btn">Click Here</button><h2 class="h2inline">!</h2>`)
+
             onDynamicButtonClick()
+
             ajaxCustomerOrders(createCustomerOrdersTable);
+
             document.querySelector('#user-orders-table tbody').onclick = function(ev) {
                 var index = ev.target.parentElement.rowIndex;
                 //        alert(`Clicked row ${index}`)
                 ajaxCustomerOrderDetails(index-1);
             }
         }
+
         if (role === "owner"){
             var feedbackTable = createFeedbackTable();
             $("#feedback-table-section").html(feedbackTable);
