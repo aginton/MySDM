@@ -29,6 +29,8 @@ public class Store {
     private List<Order> orders;
     private HashMap<InventoryItem, Integer> mapItemsToPrices;
     private HashMap<InventoryItem, Double> mapItemsToTotalSold;
+    private List<Feedback> feedbacks;
+
 
 
 
@@ -50,6 +52,7 @@ public class Store {
 
         this.location[0] = store.getLocation().getX();
         this.location[1] = store.getLocation().getY();
+        this.feedbacks = new ArrayList<>();
 
         for (SDMSell sell: store.getSDMPrices().getSDMSell()){
             InventoryItem inventoryItem = zone.getInventoryItemById(sell.getItemId());
@@ -63,7 +66,6 @@ public class Store {
             }
         }
     }
-
 
     //Store constructor used in "Add a new store" button
     public Store(String storeName,
@@ -164,6 +166,8 @@ public class Store {
     public HashMap<InventoryItem, Double> getMapItemsToTotalSold() {
         return mapItemsToTotalSold;
     }
+
+    public List<Feedback> getFeedbacks() { return feedbacks; }
 
     ///////////////////////////////////////////////////////////////////////////////////
     public static boolean checkIfStoreHasDiscounts(SDMStore store) {

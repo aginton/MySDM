@@ -4,15 +4,15 @@ import models.zone.Zone;
 
 import java.util.Date;
 
-public class Feecback {
+public class Feedback {
 
     private Zone zoneOfOrder;
     private String customerName;
     private Date dateOfOrder;
-    private eRate rate;
+    private int rate;
     private String comments;
 
-    public Feecback(Zone zoneOfOrder, String customerName, Date dateOfOrder, eRate rate, String comments) {
+    public Feedback(Zone zoneOfOrder, String customerName, Date dateOfOrder, int rate, String comments) {
         this.zoneOfOrder = zoneOfOrder;
         this.customerName = customerName;
         this.dateOfOrder = dateOfOrder;
@@ -32,9 +32,9 @@ public class Feecback {
 
     public void setDateOfOrder(Date dateOfOrder) { this.dateOfOrder = dateOfOrder; }
 
-    public eRate getRate() { return rate; }
+    public int getRate() { return rate; }
 
-    public void setRate(eRate rate) { this.rate = rate; }
+    public void setRate(int rate) { this.rate = rate; }
 
     public String getComments() { return comments; }
 

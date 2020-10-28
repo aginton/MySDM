@@ -1,0 +1,75 @@
+#chatarea {
+    overflow-y: scroll;
+    max-height: 100px;
+}
+
+.smiley-image {
+    width: 20px;
+    height: 20px;
+}
+
+
+table {
+    margin: 25px 0;
+    /*width: 200px;*/
+}
+
+table th, table td {
+    padding: 10px;
+    text-align: center;
+}
+
+table, th, td {
+    border: 1px solid;
+}
+
+table#zones-table tbody tr {
+    background-color: #ffccff;
+    cursor: pointer;
+}
+
+[class|=container] {
+    border: 1px solid red;
+    outline: 2px dashed blue;
+}
+
+#customers th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #4CAF50;
+    color: white;
+}
+
+
+
+/*body {*/
+/*    width: 960px;*/
+/*    font-family: Arial, Verdana, sans-serif;*/
+/*    color: #665544;*/
+/*}*/
+
+.container-column1of2 {
+    float: left;
+    width: 620px;
+    margin: 10px;
+}
+
+
+.container-column2of2 {
+    float: right;
+    width: 300px;
+    margin: 10px;
+}
+
+/*!* Icon when the collapsible content is shown *!*/
+/*.btn:after {*/
+/*    font-family: "Glyphicons Halflings";*/
+/*    content: "\e114";*/
+/*    float: right;*/
+/*    margin-left: 15px;*/
+/*}*/
+/*!* Icon when the collapsible content is hidden *!*/
+/*.btn.collapsed:after {*/
+/*    content: "\e080";*/
+/*}*/

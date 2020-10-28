@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add a new store</title>
+
+    <script src="../../common/jquery-3.5.1.min.js"></script>
+    <script src="../../common/context-path-helper.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../common/bootstrap/css/bootstrap.min.css">
+    <script src="../../common/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../util/util.js"></script>
+    <script src="../usersession/currentsession.js"></script>
+    <script src="../header/header.js"></script>
+    <script src="addnewtore.js"></script>
+    <link rel="stylesheet" href="../../common/styles/style.css">
+</head>
+<body>
+
+<a href="../page3zone/zone.html" class="btn">Back to selected zone</a>
+
+<h1>add new store page</h1>
+<h1 id="zoneNameHeader"></h1>
+
+<div class="add-store-form-container">
+
+    <form id="addstoreform"  method="POST" action="addNewStore">
+    <label for="storeName">Store name:</label>
+    <input type="text" id="storeName" name="storename" placeholder="Store name"> <br>
+    <label>Location: </label>
+    <select id="x-coordinate" name="xcoordinate">
+    </select>
+    <select id="y-coordinate" name="ycoordinate">
+    </select>
+    <br>
+    <label for="ppk">PPK: </label>
+    <input type="text" id="ppk" name="ppk" placeholder="PPK"> <br>
+    <label>Choose items for store: </label>
+        <table id="zone-items-table">
+            <thead>
+            <tr>
+                <th>Selected</th>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Ave Price</th>
+                <th>Total Sold</th>
+                <th>Set Price</th>
+            </tr>
+            </thead>
+
+            <tbody>
+
+            </tbody>
+
+        </table>
+    <p id="errorMessagesForTable"></p>
+    <input type="submit" value="Create new store"/>
+
+    </form>
+
+</div>
+
+
+
+</body>
+</html>

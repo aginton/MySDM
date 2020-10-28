@@ -1,0 +1,60 @@
+table {
+    margin: 25px 0;
+    /*width: 200px;*/
+}
+
+table th, table td {
+    padding: 10px;
+    text-align: center;
+}
+
+table, th, td {
+    border: 1px solid;
+}
+
+table#zones-table tbody tr {
+    background-color: #ffccff;
+    cursor: pointer;
+}
+
+[class|=container] {
+    border: 1px solid red;
+    outline: 2px dashed blue;
+}
+
+#customers th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #4CAF50;
+    color: white;
+}
+
+
+
+.container-column1of2 {
+    float: left;
+    width: 80%;
+    /*width: 620px;*/
+    margin-right: 20px;
+}
+
+
+.container-column2of2 {
+    float: right;
+    /*width: 300px;*/
+    margin-left: 10px;
+    width: 15%;
+}
+
+.main{
+    display: flex;
+    padding-left: 20px;
+    padding-right: 20px;
+
+}
+
+.p-inline {
+    display: inline-block;
+    margin: 0;
+}

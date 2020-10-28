@@ -1,5 +1,6 @@
 package models.user;
 
+import models.order.Feedback;
 import models.store.Store;
 
 import java.util.ArrayList;
@@ -10,7 +11,6 @@ import java.util.Set;
 public class Owner extends User {
     protected List<String> notifications;
     protected Set<Store> stores;
-    //private List<Feedback> feedbacks;
 
     public Owner(String name,String role){
         super(name, role);
@@ -25,4 +25,5 @@ public class Owner extends User {
     public Set<Store> getStores() {
         return stores;
     }
+
 }

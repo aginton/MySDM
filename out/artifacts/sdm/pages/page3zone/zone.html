@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+        <script src="../../common/jquery-3.5.1.min.js"></script>
+        <script src="../../common/context-path-helper.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="../../common/bootstrap/css/bootstrap.min.css">
+
+        <script src="../../common/bootstrap/js/bootstrap.min.js"></script>
+        <script src="../util/util.js"></script>
+
+
+        <script src="../usersession/currentsession.js"></script>
+        <script src="../usersession/owner.js"></script>
+        <script src="../usersession/customer.js"></script>
+        <script src="../header/header.js"></script>
+        <link rel="stylesheet" href="../../common/styles/style.css">
+        <link rel="stylesheet" href="zone.css">
+        <script src="zone.js"></script>
+    </head>
+    <body>
+
+
+
+        <div id="main-container">
+            <h1 id="welcome-msg">Welcome to zoneview!</h1>
+
+            <table id="zone-items-table">
+            <caption>Items Sold in Zone</caption>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Ave Price</th>
+                <th>Total Sold</th>
+            </tr>
+            </thead>
+
+            <tbody>
+
+            </tbody>
+        </table>
+
+        <br><br>
+        <p id="zone-table-message"></p>
+
+        <table id="zone-stores-table">
+            <caption>Zone Stores</caption>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Owner</th>
+                <th>Items</th>
+                <th>Number Orders</th>
+                <th>Income from sales</th>
+                <th>PPK</th>
+                <th>Delivery Income</th>
+            </tr>
+            </thead>
+
+            <tbody>
+
+            </tbody>
+        </table>
+
+        <br><br>
+
+        <table id="user-orders-table">
+            <caption>Customer Order History</caption>
+            <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>Order Date</th>
+                <th>Stores Involved</th>
+                <th>Cart Subtotal</th>
+                <th>Delivery</th>
+                <th>Total</th>
+            </tr>
+            </thead>
+
+            <tbody>
+
+            </tbody>
+        </table>
+
+        <br><br>
+
+        <table id="user-order-details-table">
+            <caption>Order Details</caption>
+            <thead>
+            <tr>
+                <th>Item ID</th>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Store Ordered From (id+name)</th>
+                <th>Amount</th>
+                <th>Unit Cost</th>
+                <th>Cost</th>
+                <th>On Discount?</th>
+            </tr>
+            </thead>
+
+            <tbody>
+
+            </tbody>
+        </table>
+
+
+
+<!--        <button type="button" id="static-order-btn">Click Me For New Static Order!</button>-->
+<!--        <button type="button" id="dynamic-order-btn">Click Me For New Dynamic Order!</button>-->
+<!--        <a href="../addstore/addstore.html">Add a new store</a>-->
+
+        <section id="orderFromStore">
+
+        </section>
+        <footer>
+            <a href="../page2zones/zonesoverview.html" class="btn btn-primary">Back to all Zones</a>
+        </footer>
+        </div>
+    </body>
+</html>
