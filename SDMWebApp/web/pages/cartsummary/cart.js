@@ -1,4 +1,8 @@
-var CONFIRM_ORDER_URL = buildUrlWithContextPath("confirmorder")
+var CONFIRM_ORDER_URL = buildUrlWithContextPath("confirmorder");
+var CONTINUE_SHOPPING_URL= "../chooseitems/storeitems.html";
+var SALES_URL = "../choosediscounts/sales.html";
+
+
 var tolerance = 0.0000000001;
 var cartSubtotal;
 var xpos = 1;
@@ -277,6 +281,13 @@ $(function () {
     createXYChoices();
     $("#update-cart").on('click', onUpdateClicked)
     $("#confirm-order").on('click', onConfirmOrderClick)
+    $("#continue-shopping-btn").on('click',function () {
+        window.location.replace(CONTINUE_SHOPPING_URL);
+    })
+
+    $("#goto-sales-btn").on('click',function () {
+        window.location.replace(SALES_URL);
+    })
 
     var onEmptyCall = function(){
         alert("Cart Emptied!")
