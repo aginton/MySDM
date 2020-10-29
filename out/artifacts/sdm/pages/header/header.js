@@ -10,7 +10,6 @@ var balance = sessionStorage.getItem("balance");
 
 var $bell;
 
-
 function createHeaderForCustomer(){
 
     var content = `
@@ -44,7 +43,7 @@ function createHeaderForCustomer(){
         </div>
     `
     $("body").prepend(content);
-    
+
     $("#cart-btn").on('click',function () {
         window.location.replace(CART_SUMMARY_URL);
     })
@@ -175,7 +174,7 @@ $(function() {
     link2.type = 'text/css';
     link2.href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
 
-        // Append link element to HTML head
+    // Append link element to HTML head
     head.prepend(link);
     head.prepend(link2)
 

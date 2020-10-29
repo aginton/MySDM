@@ -45,7 +45,7 @@ function buildFeedbackSection(storeId, storeName) {
 function createFeedbackForm(storesArr) {
 
     console.log("in createFeedbackForm function");
-    $('body').append("<form id=\"leavefeedbackform\"  method=\"POST\" action=\"leavefeedback\">")
+    $('body').append("<form id=\"leavefeedbackform\" name='feedback-form'  method=\"POST\" action=\"leavefeedback\">")
 
     storesArr.forEach((element, index) => {
         buildFeedbackSection(element.id, element.name);
@@ -84,27 +84,24 @@ function Feedback(storename, rate, comments) {
 const isCheckedRadioButton = element => element.type === 'radio' && element.checked;
 
 const feedbackFormToJSON = elements => [].reduce.call(elements, (data,element) => {
-
     if (isCheckedRadioButton(element)) {
         var sectionDiv = element.parentNode.parentNode;
         var storename = sectionDiv.getAttribute('data-store-name');
         var rate = element.id.charAt(0);   //1-5 stars rate
         var comments = sectionDiv.getElementsByTagName('textarea')[0].value;
         console.log("in feedbackFormToJSON: creating feedback for store : " + storename + "rate: " + rate + " stars and comments: " + comments);
-        var feedback = new Feedback(storename,rate,comments);
+        var feedback = new Feedback(storename,parseInt(rate),comments);
         data["feedbacks"] = (data["feedbacks"] || []).concat(feedback);
     }
 
-    console.log("in feedbackFormToJSON ");
-    console.log(data);
+    // console.log("in feedbackFormToJSON ");
+    // console.log(data);
 
     return data;
-
 }, {});
 
 //on load function
 $(function() {
-
 
     // const arr = [{id: 1, name: 'store1' }, {id: 2, name: 'store2' }, {id: 3, name: 'store3' }];
     // sessionStorage.setItem('storesOrderedFrom', JSON.stringify(arr));
@@ -121,8 +118,11 @@ $(function() {
             e.preventDefault();
 
             var form = document.getElementById('leavefeedbackform');
-            console.log("printing the feedbacks array before the ajax call:");
-            console.log(feedbackFormToJSON(form.elements));
+            //console.log("printing the feedbacks array before the ajax call:");
+            var dataToPass = (feedbackFormToJSON(form.elements)).feedbacks;
+            console.log("printing dataToPass:");
+            console.log(dataToPass);
+            console.log("--------------------------------")
 
             /*data sent to servlet in format:
             {
@@ -144,27 +144,17 @@ $(function() {
                 $.ajax({
                     type: "POST",
                     url: LEAVE_FEEDBACK_URL,
-                    data: {customer: customer,
-                           zone: zone,
-                           feedbacks: feedbackFormToJSON(form.elements)},
-                    dataType: "json",
-                    success: function (data) {
-                        console.log("ajax call success on leave feedback, returned following data:!");
-                        console.log(data)
-                        if (data) {
-                            alert("Thank you for the feedback! \n returning to zone page...");
-                            window.location = "../page3zone/zone.html";
-                        }
-
-                        else {              //chosen location is not available
-                            alert("Unavailable location:\n There is already a store in (" + data.loc[0] + "," + data.loc[1] + ")");
-                        }
+                    data: {"customer": customer,
+                           "zone": zone,
+                           "feedbacks": JSON.stringify(dataToPass)},
+                    success: function () {
+                        alert("Thank you for the feedback! \n returning to zone page...");
+                        window.location = "../page3zone/zone.html";
                     },
                     error: function (data) {
-                        console.log("error occured on leave feedback ajax call");
+                        console.log("error occured on leave feedback ajax call - " + data.message);
                         alert("Unable to leave feedback. :(");
                     }
-
                 })
         })
 })

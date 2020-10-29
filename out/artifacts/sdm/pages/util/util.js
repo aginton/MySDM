@@ -1,3 +1,25 @@
+function compareStoreBroughtFromAndIds(a, b) {
+    // Use toUpperCase() to ignore character casing
+    const itemA = a.storeOrderedFrom;
+    const itemB = b.storeOrderedFrom;
+
+    let comparison = 0;
+    if (itemA > itemB) {
+        comparison = 1;
+    } else if (itemA < itemB) {
+        comparison = -1;
+    } else{
+        const idA = a.id;
+        const idB = b.id;
+        if (idA> idB){
+            comparison = 1;
+        } else if (idA < idB){
+            comparison = -1;
+        }
+    }
+    return comparison;
+}
+
 function compareItemID(a, b) {
     // Use toUpperCase() to ignore character casing
     const itemA = a.id;

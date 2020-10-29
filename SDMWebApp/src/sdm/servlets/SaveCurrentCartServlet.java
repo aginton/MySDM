@@ -60,6 +60,8 @@ public class SaveCurrentCartServlet extends HttpServlet {
 
         synchronized (user){
             user.getCurrentCart().getCartItems().clear();
+            user.getCurrentCart().setTotalNumberItems(0);
+            user.getCurrentCart().setTotalNumberItemsByType(0);
             for (Item item: items){
                 System.out.println(TAG + " - received following item\n" + item);
                 Store store = zone.getStoreByName(item.store);

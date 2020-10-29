@@ -1,5 +1,6 @@
 var OWNER_URL=buildUrlWithContextPath("currentowner")
 var OWNER_ORDERS_URL=buildUrlWithContextPath("ownerorders")
+var OWNER_FEEDBACK_BY_ZONE_URL = buildUrlWithContextPath("feedbackbyzone");
 
 var lastNotificationAdded = 0;
 
@@ -35,6 +36,73 @@ function ajaxOwner(){
         }
     })
     setTimeout(ajaxOwner,refreshRate)
+}
+
+function createFeedbackTable() {
+    var htmlContent = `<div class="modal" id="myModal">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                            <h4 class="modal-title">Feedbacks for My Stores</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+
+                        <!-- Modal body -->
+                        <div class="modal-body">
+                            <table id="feedbacks-table" class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Store</th>
+                                    <th>Customer</th>
+                                    <th>Rating (1-5)</th>
+                                    <th>Comments</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>`
+
+    return htmlContent;
+}
+
+function createModal(data) {
+    var trHTML = '';
+    data.forEach(function(feedback,index){
+      trHTML += `<tr><td>${feedback.date}</td><td>${feedback.store}</td><td>${feedback.customer}</td><td>${feedback.rating}</td><td>${feedback.comments}</td></tr>`
+    })
+    $('#feedbacks-table tbody').empty().html(trHTML)
+
+    $("#myModal").modal('show');
+    //data-toggle="modal" data-target="#myModal"
+}
+
+function ajaxFeedbackByZone(zone) {
+    $.ajax({
+        url: OWNER_FEEDBACK_BY_ZONE_URL,
+        data: {"zone": zone},
+        dataType: 'json',
+        success: function (data) {
+            console.log("FeedbackByZone success, returned following:")
+            console.log(data);
+            createModal(data);
+        },
+        error: function (error) {
+            console.log("FeedbackByZone error - " + error.message);
+        }
+    })
 }
 
 function ajaxOwnerOrders(callback){
