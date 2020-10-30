@@ -1,21 +1,21 @@
-table {
-    margin: 25px 0;
-    /*width: 200px;*/
-}
+/*table {*/
+/*    margin: 25px 0;*/
+/*    !*width: 200px;*!*/
+/*}*/
 
-table th, table td {
-    padding: 10px;
-    text-align: center;
-}
+/*table th, table td {*/
+/*    padding: 10px;*/
+/*    text-align: center;*/
+/*}*/
 
-table, th, td {
-    border: 1px solid;
-}
+/*table, th, td {*/
+/*    border: 1px solid;*/
+/*}*/
 
-table#zones-table tbody tr {
-    background-color: #ffccff;
-    cursor: pointer;
-}
+/*table#zones-table tbody tr {*/
+/*    background-color: #ffccff;*/
+/*    cursor: pointer;*/
+/*}*/
 
 [class|=container] {
     border: 1px solid red;
@@ -57,4 +57,80 @@ table#zones-table tbody tr {
 .p-inline {
     display: inline-block;
     margin: 0;
+}
+
+.styled-zones-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.15);
+
+}
+
+.styled-zones-table thead tr {
+    background-color: #009879;
+    color: #ffffff;
+    text-align: left;
+    cursor: pointer;
+}
+
+.styled-zones-table .th,
+.styled-zones-table td {
+    padding: 12px 15px;
+}
+
+.styled-zones-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.styled-zones-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.styled-zones-table body tr:last-of-type {
+    border-bottom: 2px solid #009879;
+}
+
+.btn {
+    padding: 14px 24px;
+    border: 0 none;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.btn:focus, .btn:active:focus, .btn.active:focus {
+    outline: 0 none;
+}
+
+.btn-primary {
+    background: #0099cc;
+    color: #ffffff;
+}
+
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary {
+    background: #33a6cc;
+}
+
+.btn-primary:active, .btn-primary.active {
+    background: #007299;
+    box-shadow: none;
+}
+
+.btn-primary.outline {
+    border: 2px solid #0099cc;
+    color: #0099cc;
+}
+
+.btn-primary.outline:hover, .btn-primary.outline:focus, .btn-primary.outline:active, .btn-primary.outline.active, .open > .dropdown-toggle.btn-primary {
+    color: #33a6cc;
+    border-color: #33a6cc;
+}
+.btn-primary.outline:active, .btn-primary.outline.active {
+    border-color: #007299;
+    color: #007299;
+    box-shadow: none;
 }

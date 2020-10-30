@@ -174,7 +174,7 @@ function createUploadFileSection(){
                     <input type="file" name="fileToUpload" id="file2upload">
                     <br/>
                     <br/>
-                    <input id="submitbutton" type="submit" value="Upload File">
+                    <input id="submitbutton" class="btn btn-primary" type="submit" value="Upload File">
                 </form>
             </div>
             <br><br>
