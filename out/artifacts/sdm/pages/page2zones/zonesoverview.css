@@ -1,3 +1,6 @@
+@import url("https://use.fontawesome.com/releases/v5.13.0/css/all.css");
+
+
 /*table {*/
 /*    margin: 25px 0;*/
 /*    !*width: 200px;*!*/
@@ -17,10 +20,10 @@
 /*    cursor: pointer;*/
 /*}*/
 
-[class|=container] {
-    border: 1px solid red;
-    outline: 2px dashed blue;
-}
+/*[class|=container] {*/
+/*    border: 1px solid red;*/
+/*    outline: 2px dashed blue;*/
+/*}*/
 
 #customers th {
     padding-top: 12px;
@@ -45,6 +48,8 @@
     /*width: 300px;*/
     margin-left: 10px;
     width: 15%;
+    border: 3px #fba67d;
+    border-radius: 15px;
 }
 
 .main{
@@ -94,43 +99,71 @@
     border-bottom: 2px solid #009879;
 }
 
-.btn {
-    padding: 14px 24px;
-    border: 0 none;
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-transform: uppercase;
+.styled-activity-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.15);
+
 }
 
-.btn:focus, .btn:active:focus, .btn.active:focus {
-    outline: 0 none;
-}
-
-.btn-primary {
-    background: #0099cc;
+.styled-activity-table thead tr {
+    background-color: #b8301a;
     color: #ffffff;
+    text-align: left;
+    cursor: pointer;
 }
 
-.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary {
-    background: #33a6cc;
+.styled-activity-table .th,
+.styled-activity-table td {
+    padding: 12px 15px;
 }
 
-.btn-primary:active, .btn-primary.active {
-    background: #007299;
-    box-shadow: none;
+.styled-activity-table tbody tr {
+    border-bottom: 1px solid #de9a9a;
 }
 
-.btn-primary.outline {
-    border: 2px solid #0099cc;
-    color: #0099cc;
+.styled-activity-table tbody tr:nth-of-type(even) {
+    background-color: #f8c1c1;
 }
 
-.btn-primary.outline:hover, .btn-primary.outline:focus, .btn-primary.outline:active, .btn-primary.outline.active, .open > .dropdown-toggle.btn-primary {
-    color: #33a6cc;
-    border-color: #33a6cc;
+.styled-activity-table body tr:last-of-type {
+    border-bottom: 2px solid #c93c25;
 }
-.btn-primary.outline:active, .btn-primary.outline.active {
-    border-color: #007299;
-    color: #007299;
-    box-shadow: none;
+
+.upload-btn-wrapper {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+}
+
+.btn {
+    border: 2px solid #b8301a;
+    color: #b8301a;
+    background-color: white;
+    padding: 8px 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.upload-btn-wrapper input[type=file] {
+
+    border: 1px;
+}
+
+.userslist ul li {
+    line-height: 1.5;
+    padding:  0.5em 0;
+    list-style-type: none!important;
+}
+
+.userslist ul li:before {
+font-family: FontAwesome;
+    content: "\f138";
+    left: 1em;
+    color: skyblue;
 }

@@ -16,9 +16,11 @@ function buildFeedbackSection(storeId, storeName) {
     var feedbackSection = '';
 
     feedbackSection += `
-    <div id=${sectionName} data-store-name="${storeName}">
+    <div id=${sectionName} data-store-name="${storeName}" class="feedback-section">
     <p>Leave feedback for store: <span>${storeName}</span></p>
-    <div class="star-widget" class="container">
+    <div class="row">
+    <div class="column side col-5">
+    <div class="star-widget">
         <input type="radio" name=${radioBtnGroupName} id="5-${starId}">
         <label for="5-${starId}" class="fas fa-star"></label>
         <input type="radio" name=${radioBtnGroupName} id="4-${starId}">
@@ -31,10 +33,12 @@ function buildFeedbackSection(storeId, storeName) {
         <label for="1-${starId}" class="fas fa-star"></label>
           <header></header>
     </div>
-    <br>
-    <br>
+    </div>
+    <div class="column middle"></div>
+    <div class="column side"></div>
+    </div>
     <p>comments:</p>
-    <textarea disabled id=${textAreaName} cols="100" placeholder="Describe your experience.."></textarea> 
+    <textarea disabled id=${textAreaName} cols="70" placeholder="Describe your experience.."></textarea> 
     </div>
     <br>
     `
@@ -45,7 +49,7 @@ function buildFeedbackSection(storeId, storeName) {
 function createFeedbackForm(storesArr) {
 
     console.log("in createFeedbackForm function");
-    $('body').append("<form id=\"leavefeedbackform\" name='feedback-form'  method=\"POST\" action=\"leavefeedback\">")
+    $('#middlediv').append("<form id=\"leavefeedbackform\" name='feedback-form'  method=\"POST\" action=\"leavefeedback\">")
 
     storesArr.forEach((element, index) => {
         buildFeedbackSection(element.id, element.name);
@@ -54,7 +58,7 @@ function createFeedbackForm(storesArr) {
 
     $('#leavefeedbackform').append('<button type="button" id="skip-btn">Skip this step</button>');
     $('#leavefeedbackform').append('<input type="submit" value="Send feedback" />');
-    $('body').append("</form>");
+    $('#middlediv').append("</form>");
 }
 
 function onSkipClick() {
@@ -133,14 +137,6 @@ $(function() {
                            "comments: "Great experience!"}, ...]
             }
             */
-
-                /*data returned from servlet in format:
-                    {
-                        ???
-                     }
-
-                 */
-
                 $.ajax({
                     type: "POST",
                     url: LEAVE_FEEDBACK_URL,

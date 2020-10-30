@@ -16,7 +16,7 @@ table, th, td{
 
     text-align: center;
     font-weight: bold;
-    font-size: 1.5em;
+    font-size: 15px;
     color: #333;
     margin-bottom: 15px;
 }
@@ -42,7 +42,7 @@ table, th, td{
 }
 
 .shop-item-image {
-    height: 250px;
+    height: 80px;
 }
 
 .shop-item-details {
