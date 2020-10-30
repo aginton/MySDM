@@ -17,25 +17,25 @@ function buildFeedbackSection(storeId, storeName) {
 
     feedbackSection += `
     <div id=${sectionName} data-store-name="${storeName}" class="feedback-section">
-    <p>Leave feedback for store: <span>${storeName}</span></p>
-    <div class="row">
-    <div class="column side col-5">
-    <div class="star-widget">
-        <input type="radio" name=${radioBtnGroupName} id="5-${starId}">
-        <label for="5-${starId}" class="fas fa-star"></label>
-        <input type="radio" name=${radioBtnGroupName} id="4-${starId}">
-        <label for="4-${starId}" class="fas fa-star"></label>
-        <input type="radio" name=${radioBtnGroupName} id="3-${starId}">
-        <label for="3-${starId}" class="fas fa-star"></label>
-        <input type="radio" name=${radioBtnGroupName} id="2-${starId}">
-        <label for="2-${starId}" class="fas fa-star"></label>
-        <input type="radio" name=${radioBtnGroupName} id="1-${starId}">
-        <label for="1-${starId}" class="fas fa-star"></label>
-          <header></header>
-    </div>
-    </div>
-    <div class="column middle"></div>
-    <div class="column side"></div>
+        <p>Leave feedback for store: <span>${storeName}</span></p>
+        <div class="row">
+            <div class="column side col-5">
+                <div class="star-widget">
+                    <input type="radio" name=${radioBtnGroupName} id="5-${starId}">
+                    <label for="5-${starId}" class="fas fa-star"></label>
+                    <input type="radio" name=${radioBtnGroupName} id="4-${starId}">
+                    <label for="4-${starId}" class="fas fa-star"></label>
+                    <input type="radio" name=${radioBtnGroupName} id="3-${starId}">
+                    <label for="3-${starId}" class="fas fa-star"></label>
+                    <input type="radio" name=${radioBtnGroupName} id="2-${starId}">
+                    <label for="2-${starId}" class="fas fa-star"></label>
+                    <input type="radio" name=${radioBtnGroupName} id="1-${starId}">
+                    <label for="1-${starId}" class="fas fa-star"></label>
+                    <header></header>
+                </div>
+            </div>
+        <div class="column middle"></div>
+        <div class="column side"></div>
     </div>
     <p>comments:</p>
     <textarea disabled id=${textAreaName} cols="70" placeholder="Describe your experience.."></textarea> 
@@ -89,7 +89,7 @@ const isCheckedRadioButton = element => element.type === 'radio' && element.chec
 
 const feedbackFormToJSON = elements => [].reduce.call(elements, (data,element) => {
     if (isCheckedRadioButton(element)) {
-        var sectionDiv = element.parentNode.parentNode;
+        var sectionDiv = element.parentNode.parentNode.parentNode.parentNode;
         var storename = sectionDiv.getAttribute('data-store-name');
         var rate = element.id.charAt(0);   //1-5 stars rate
         var comments = sectionDiv.getElementsByTagName('textarea')[0].value;
