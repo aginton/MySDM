@@ -171,7 +171,7 @@ function createOnlineUsersList(){
 
     var index = 0;
     users.forEach((user)=>{
-        list += '<li>' + user.name + "-" + user.role + '</li>'
+        list += '<li>' + " " + user.name + " - " + user.role + '</li>'
     })
     return list;
 }

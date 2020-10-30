@@ -24,6 +24,39 @@
     font-weight: 500;
 }
 
+.feedback-section {
+    background-color: #e8e8e8;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+
+
+}
+
+/* Create three unequal columns that floats next to each other */
+.column {
+    float: left;
+    padding: 10px;
+}
+
+/* Left and right column */
+.column.side {
+    width: 25%;
+}
+
+/* Middle column */
+.column.middle {
+    width: 50%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+
 input[type=radio] {
     visibility: hidden!important;
     margin: 0!important;
@@ -35,15 +68,14 @@ form + div {
 }
 
 .star-widget {
-    background-color: #deadff;
-    border: 1px #00ff59;
+
 }
 
 .container .star-widget input{
     display: none;
 }
 .star-widget label{
-    font-size: 30px;
+    font-size: 20px;
     color: #444;
     padding: 10px;
     float: right;
@@ -60,21 +92,7 @@ input#rate-5:checked ~ label{
     color: #fe7;
     text-shadow: 0 0 20px #952;
 }
-#rate-1:checked ~ form header:before{
-    content: "I just hate it 😠";
-}
-#rate-2:checked ~ form header:before{
-    content: "I don't like it 😒";
-}
-#rate-3:checked ~ form header:before{
-    content: "It is awesome 😄";
-}
-#rate-4:checked ~ form header:before{
-    content: "I just like it 😎";
-}
-#rate-5:checked ~ form header:before{
-    content: "I just love it 😍";
-}
+
 .container form{
     display: none;
 }

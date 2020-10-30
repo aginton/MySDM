@@ -171,13 +171,12 @@ function createUploadFileSection(){
     var content = `            <div class="container-uploadform">
                 <form id="file-upload-form">
                     <p>What file do you want to upload?</p>
-                    <input type="file" name="fileToUpload" id="file2upload">
-                    <br/>
-                    <br/>
-                    <input id="submitbutton" class="btn btn-primary" type="submit" value="Upload File">
+                    <div class="upload-btn-wrapper">
+                    <input type="file" name="fileToUpload" id="file2upload">   
+                    <input id="submitbutton" class="btn" type="submit" value="Upload File">
+                    </div>
                 </form>
             </div>
-            <br><br>
             <p id="filesubmitmessage"></p>`
     $(".container-column1of2").prepend(content)
 }

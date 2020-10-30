@@ -5,7 +5,6 @@
 
 * {
     font-family: 'Raleway', sans-serif;
-
 }
 
 html, body {
@@ -57,7 +56,6 @@ html, body {
     padding: 0 1.5em;
 }
 .section-header {
-    font-family: "Metal Mania";
     font-weight: normal;
     color: #333;
     text-align: center;
